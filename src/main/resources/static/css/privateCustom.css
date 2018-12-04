@@ -1,0 +1,363 @@
+ul{
+    margin: 0;
+    padding: 0;
+}
+ul{
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    /*padding-inline-start: 40px;*/
+}
+li{
+    list-style: none;
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+label {
+    cursor: default;
+}
+input{
+    -webkit-appearance: textfield;
+    background-color: white;
+    -webkit-rtl-ordering: logical;
+}
+input{
+    vertical-align: middle;
+    font-size: 100%;
+    outline: 0;
+    font-family: 'Microsoft YaHei',Arial,sans-serif;
+}
+input{
+    text-rendering: auto;
+    color: initial;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    font: 400 13.3333px Arial;
+}
+input:focus{
+    outline-offset: -2px;
+}
+input{
+    -webkit-writing-mode:  horizontal-tb !important;
+}
+
+/********* 整个div的大小 ************************************************/
+.cus-formContent{
+    width: 100%;
+    height: 880px;
+    /*border: 1px solid black;*/
+}
+/********** 内容部分div的大小设置 ***************************************/
+.cus-formContent .cus-form{
+    width: 1190px;
+    margin: 60px auto;
+    background-color: white;
+    box-shadow: 0 1px 20px 0 #cccccc;
+}
+/********** 左半部分的大小设置 *****************************************/
+.cus-formContent .cus-form .cus-formLeft{
+    width: 727px;
+    margin: 26px 0 45px;
+    float: left;
+    padding-left: 46px;
+}
+/********** 左半部分的title部分 ****************************************/
+.cus-formContent .cus-form .cus-formLeft .cus-formLeft-title{
+    width: 100%;
+    border-bottom: 1px dotted #dcdcdc;
+}
+.cus-formContent .cus-form .cus-formLeft .cus-formLeft-title h3{
+    float: left;
+    font-size: 24px;
+    margin-top: 0;
+    /*color: #333333;*/
+}
+.cus-formContent .cus-form .cus-formLeft .cus-formLeft-title p{
+    float: left;
+    font-size: 14px;
+    color: #999;
+    margin-top: 11px;
+    margin-left: 7px;
+}
+.clearfix:after{
+    content: '.';
+    display: block;
+    clear: both;
+    line-height: 0;
+    height: 0;
+    visibility: hidden;
+}
+/********** 左半部分的main部分 ****************************************/
+.cus-formLeft-main{
+    margin-top: 40px;
+}
+.cus-formLeft .cus-formLeft-main li label{
+    width: 120px;
+    text-align: right;
+    font-size: 16px;
+    color: #666666;
+    display: inline-block;
+}
+.cus-component{
+    display: inline-block;
+    width: 550px;
+    height: auto;
+    margin-bottom: 19px;
+    position: relative;
+}
+.cus-selectBox {
+    vertical-align: top;
+    line-height: 50px;
+}
+.cus-select.cur{
+    background: url("../images/cur-pic_294b1af.png")  no-repeat;
+    border-color: #50b400;
+    color: #50b400;
+    background-position: 100% 0;
+}
+.cus-select{
+    display: inline-block;
+    width: 130px;
+    height: 40px;
+    margin-right: 15px;
+    border: 1px solid #dcdcdc;
+    border-radius: 2px;
+    box-sizing:border-box;;
+    text-align: center;
+    line-height: 40px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.citybox{
+    display: inline-block;
+    width: 357px;
+}
+.cus-input{
+    width: 357px;
+    height: 32px;
+    border: 1px solid #dcdcdc;
+    border-radius: 2px;
+    box-sizing: border-box;
+    cursor: pointer;
+    padding-left: 10px;
+}
+.cus-Cinput {
+    text-align: center;
+    padding: 6px 8px;
+    position: relative;
+    top: 2px;
+    display: none;
+    color: red;
+}
+/********** 左半部分的计算 加减部分 ****************************************/
+.cus-countBox {
+    display: inline-block;
+    font-size: 14px;
+    color: #333;
+    margin-right: 20px;
+}
+.cus-count {
+    display: inline-block;
+    width: 130px;
+    height: 33px;
+    border: 1px solid #dcdcdc;
+    border-radius: 2px;
+    box-sizing: border-box;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+.cus-count .cus-minCount {
+    display: block;
+    width: 34px;
+    height: 100%;
+    border-right: 1px solid #dcdcdc;
+    box-sizing: border-box;
+    float: left;
+    cursor: pointer;
+}
+.cus-count .cus-minCount:before {
+    content: ' ';
+    width: 15px;
+    height: 1px;
+    background: #50b400;
+    margin-left: 8px;
+    display: inline-block;
+}
+.cus-count .cus-countShow {
+    width: 60px;
+    height: 100%;
+    border: 0;
+    text-align: center;
+    line-height: 33px;
+    color: #333;
+    font-size: 14px;
+    float: left;
+}
+.cus-count .cus-maxCount {
+    width: 34px;
+    height: 100%;
+    border-left: 1px solid #dcdcdc;
+    box-sizing: border-box;
+    float: right;
+    display: block;
+    cursor: pointer;
+}
+.cus-count .cus-maxCount:before {
+    content: ' ';
+    width: 15px;
+    height: 1px;
+    background: #50b400;
+    margin-left: 8px;
+    display: inline-block;
+}
+.cus-count .cus-maxCount:after {
+    content: ' ';
+    width: 1px;
+    height: 15px;
+    background: #50b400;
+    margin-left: 15px;
+    display: inline-block;
+    position: relative;
+    top: -13px;
+}
+
+
+/***************************************************************************/
+.citybox #popleave{
+    position: absolute;
+    z-index: 2;
+    top: 0;
+}
+.citybox #popleave .leavecity{
+    width: 352px;
+    background: white;
+    box-shadow: 1px 1px 2px #f1f1f1;
+    top: -1px;
+    position: absolute;
+    margin-top: 33px;
+    z-index: 2;
+    border: 1px solid #dddddd;
+}
+.citybox #popleave .leavecity .sub-scity-tips {
+    padding: 25px 15px 10px 20px;
+    font-size: 12px;
+    color: #666;
+}
+.citybox #popleave .leavecity .sub-scity-tips ul {
+    border-bottom: #ddd 1px solid;
+    padding-left: 0;
+}
+.citybox #popleave .leavecity .sub-scity-tips ul li.cur {
+    border-bottom: #50b400 2px solid;
+    color: #50b400;
+    position: relative;
+    top: 1px;
+    font-weight: 700;
+}
+.citybox #popleave .leavecity .sub-scity-tips ul li {
+    float: left;
+    padding: 0 10px;
+    line-height: 25px;
+    cursor: pointer;
+    background: #fff;
+    border: #fff 1px solid;
+}
+/********** 左半部分的提交部分 ****************************************/
+.cus-submit {
+    width: 134px;
+    height: 34px;
+    border-radius: 2px;
+    background-color: #b3825a;
+    text-align: center;
+    line-height: 34px;
+    font-size: 20px;
+    color: #fff;
+    margin-left: 123px;
+    cursor: pointer;
+}
+/********** 右半部分 ****************************************/
+.cus-formRight {
+    width: 372px;
+    height: 855px;
+    background-color: #4c5a65;
+    float: right;
+    padding-top: 140px;
+    padding-bottom: 146px;
+    padding-left: 45px;
+    position: relative;
+}
+.citybox #popleave .leavecity {
+    width: 352px;
+    background: white;
+    box-shadow: 1px 1px 2px #f1f1f1;
+    top: -1px;
+    position: absolute;
+    margin-top: 33px;
+    z-index: 2;
+    border: 1px solid #dddddd;
+}
+.citybox #popleave .leavecity .sub-scity-tips {
+    padding: 25px 15px 10px 20px;
+    font-size: 12px;
+    color: #666;
+}
+.cus-formRight h3 {
+    font-size: 24px;
+    color: #fff;
+    margin-bottom: 30px;
+}
+.cus-formRight .cus-formRight-list li {
+    margin-bottom: 24px;
+}
+.cus-formRight .cus-formRight-list label {
+    width: 80px;
+    text-align: right;
+    font-size: 16px;
+    color: #aab3ba;
+    display: inline-block;
+}
+.cus-formRight .cus-formRight-list span {
+    font-size: 14px;
+    color: #fff;
+}
+.check_valid {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background-size: 100%;
+    border-radius: 7px;
+    background: url("../images/valid_symbol_2edab74.png");
+    overflow: hidden;
+}
+.cus-formRight .cus-tag {
+    position: absolute;
+    top: 165px;
+    left: -8px;
+    color: #4c5a65;
+    font-size: 30px;
+}
+
+
+element.style {
+    width: 532px;
+    position: absolute;
+    z-index: 10000;
+    top: 1989.87px;
+    left: 529.847px;
+    display: block;
+}
+.calendar-panel.white .previous-month-disabled, .calendar-panel.white .previous-month-disabled:hover {
+    background-position: -100px -43px;
+}
+.calendar-panel.white .next-month {
+    background-position: -49px 0;
+}

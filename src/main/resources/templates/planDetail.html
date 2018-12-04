@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+    <link rel="SHORTCUT ICON" href="/images/title.ico"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Blue Water Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <link href="/css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <link href="/css/style.css" rel='stylesheet' type='text/css' />
+    <link href="/css/productPresentation.css" rel='stylesheet' type='text/css' />
+    <script src="/js/jquery-1.11.0.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Exo:100,200,300,400,500,600,700,800,900,100italic,200italic,300italic,400italic,500italic,600italic,700italic,800italic,900italic' rel='stylesheet' type='text/css'>
+    <!---- start-smoth-scrolling---->
+    <script type="text/javascript" src="/js/move-top.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=eYf9sA6yVTFHlh9ytU4a0EYY"></script>
+    <link rel="stylesheet" href="/css/searchBox.css">
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+                $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
+            });
+        });
+
+        window.onload = function () {
+            var data = localStorage.getItem('loginMessage');
+            console.log(data);
+            if (data != null) {
+                var objData = JSON.parse(data);
+                if (new Date().getTime() - objData.time > 1000 * 60 * 30) {
+                    localStorage.removeItem('loginMessage');
+                } else {
+                    document.getElementById("showPortrait").style.backgroundImage= "url("+JSON.parse(objData.data).data.visitorPortrait+")";
+                    document.getElementById("loginA").style.display = "none";
+                    document.getElementById("logoutA").style.display = "block";
+                    document.getElementById("switchMemberA").style.display = "block";
+                    document.getElementById("modifyPasswordA").style.display = "block";
+                    document.getElementById("modifyInformationA").style.display = "block";
+                    document.getElementById("orderManageA").style.display = "block";
+                }
+            }
+
+            //显示数据
+            var url = window.location.href;
+            console.log(url);
+            var urlSplit = url.split('/');
+            var id = url.split("/")[urlSplit.length - 1];
+            if (window.XMLHttpRequest) {
+                xhr = new XMLHttpRequest();
+            } else {
+                xhr = new ActiveXObject('Microsoft.XMLHTTP');
+            }
+            // url_getPlanDetail = "/yantu/plan/getPlanDetail/" + id;
+            xhr.open("GET", "/yantu/plan/getPlanDetail/" + id, true);
+            // console.log("url_getPlanDetail:" + url_getPlanDetail);
+            xhr.setRequestHeader("Content-Type", "application/json;charset=utf-8");
+            xhr.send();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var result = JSON.parse(xhr.responseText);
+                    console.log(result.data);
+                    //渲染图片(轮播)
+                    var objScenicList = result.data.scenicList;
+                    console.log(objScenicList);
+                    var pictureContainerImg = document.getElementsByClassName("pictureContainerImg");
+                    console.log(pictureContainerImg.src)
+                    console.log(pictureContainerImg.srcElement)
+                    var k=0;
+                    for(var i =0;i<objScenicList.length;i++){
+                        for(var j=0;j<objScenicList[i].scenicPhotoList.length;j++){
+                            if(k<=3){
+                                pictureContainerImg[k].src = objScenicList[i].scenicPhotoList[j].photoSrc;
+                                k++;
+
+                            }else {
+                                break;
+                            }
+                        }
+                    }
+
+                    //渲染plan信息
+                    document.getElementById("titlePlan").innerText = result.data.planName + "<"+result.data.planDescription+">";
+                    document.getElementById("pricePlan").innerText = result.data.planDiscount;
+                    document.getElementById("idPlan").innerText = result.data.planId;
+                    document.getElementById("cityPlan").innerText = result.data.scenicList[0].scenicLocation;
+                    document.getElementById("dayPlan").innerText = "2";
+                    document.getElementById("peoplePlan").innerText = result.data.planSuiter;
+
+                    //渲染时间轴信息
+                    var timeshaftMessageDiv = document.getElementById("timeshaftMessage");
+                    var objTimeshaft = result.data.timeshaft;
+                    timeshaftMessageDiv.innerHTML += (
+                        '<div class="plan_day main1" id="timeShaftContainDiv">\n' +
+                        '     <p class="detaildays"> 苏州<em class="icon gliconbus"></em>'+objScenicList[0].scenicLocation+'<em class="icon gliconbus"></em>苏州</p>\n' +
+                        '</div>\n'
+
+                    );
+
+                    for(var timeshagtI = 0;timeshagtI<objTimeshaft.length;timeshagtI++){
+                        var timeshaftDescriptionMessage = objTimeshaft[timeshagtI].timeshaftDescription.split("--");
+                        document.getElementById("timeShaftContainDiv").innerHTML += (
+                    '         <div class="module">\n' +
+                    '              <div class="plan_one">\n' +
+                    '              <span>'+objTimeshaft[timeshagtI].timeshaftTime+'</span>\n' +
+                    '                   <b>'+timeshaftDescriptionMessage[0]+'</b>\n' +
+                    '              </div>\n' +
+                    '              <div class="traffic">\n' +
+                    '              <p class="timeAndway">\n' +
+                    '              <em class="tourTime"></em>'+objTimeshaft[timeshagtI].timeshaftXx+'</p>\n' +
+                    '              <p class="description">'+timeshaftDescriptionMessage[1]+'</p>\n' +
+                    '              <div class="imgbox" style="display: none;"></div>\n' +
+                    '                   <div class="reminder">\n' +
+                    '                        <p class="title">*温馨提示：</p>\n' +
+                    '                            <p>由于本线路为轻户外徒步线，有一定体力要求，请在确保身体状况良好的情况下选择出游，60岁以上游客不建议报名参加，感谢理解。出游时请穿着运动服或冲锋衣裤、登山鞋或运动鞋，自备登山杖、护膝等防护用品；携带保温壶或矿泉水、纸巾（湿纸巾）、垃圾袋。 自备适量食品：新鲜时令水果 、巧克力、面包、火腿肠等。徒步过程中请不要随地丢弃果皮废纸等垃圾，保护环境，人人有责。</p>\n' +
+                    '                    </div>\n' +
+                    '              </div>\n' +
+                    '              </div>\n'
+
+                        );
+                    }
+
+                    //找到地点的坐标
+                    if (window.XMLHttpRequest) {
+                        xhr = new XMLHttpRequest();
+                    } else {
+                        xhr = new ActiveXObject('Microsoft.XMLHTTP');
+                    }
+                    var objName = {
+                        city : objScenicList[0].scenicLocation,
+                        name : objScenicList[0].scenicName
+                    };
+                    var jsonName = JSON.stringify(objName);
+                    xhr.open("POST", "/yantu/plan/getPlanMap" , true);
+                    xhr.setRequestHeader("Content-Type", "application/json;charset=utf-8");
+                    xhr.send(jsonName);
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState === 4 && xhr.status === 200) {
+                            var result = JSON.parse(xhr.responseText);
+                            if(result != null){
+                                console.log(result.result);
+                                var lat = result.result.location.lat;
+                                var lng = result.result.location.lng;
+                                console.log(lat);
+                                // 百度地图API功能
+                                var map = new BMap.Map("allmap");
+                                map.centerAndZoom(new BMap.Point(120.74638582020875,31.27957758028855), 11);
+                                map.enableScrollWheelZoom(true);
+                                var p1 = new BMap.Point(120.74638582020875,31.27957758028855);
+                                var p2 = new BMap.Point(lng,lat);
+                                var driving = new BMap.DrivingRoute(map, {renderOptions:{map: map, autoViewport: true}});
+                                driving.search(p1, p2,{waypoints:["西交利物浦大学","苏州大学"]});//waypoints表示途经点
+
+                            }else {
+                                // 百度地图API功能
+                                var map1 = new BMap.Map("allmap");
+                                map1.centerAndZoom(new BMap.Point(120.74638582020875,31.27957758028855), 11);
+                                map1.enableScrollWheelZoom(true);
+                                var p11 = new BMap.Point(120.74638582020875,31.27957758028855);
+                                var p21 = new BMap.Point(120.574947,31.316435);
+                                var driving1 = new BMap.DrivingRoute(map1, {renderOptions:{map: map1, autoViewport: true}});
+                                driving1.search(p11, p21,{waypoints:["西交利物浦大学","苏州大学"]});//waypoints表示途经点
+
+                            }
+
+                        }
+
+
+
+                    }
+
+                }
+            }
+        }
+    </script>
+    <!--start-smoth-scrolling-->
+    <style>
+        .team{
+            padding: 4em 0 3em 0;
+        }
+        .booking-top-left{
+            margin-top: 30px;width: 640px;
+        }
+        #testimonials{
+            position: relative !important;
+            width: 600px !important;
+            left: 5px !important;
+        }
+        .container-flueid article{
+            position: absolute;
+            width:64%;
+            opacity: 0;
+        }
+        .container-flueid img{
+            height:400px;
+            width:600px;
+        }
+        .booking-top-right{
+            float: none; margin-left: 650px;margin-top: 30px;width: 500px;height: 400px
+        }
+        .tour-information{
+            background-color:rgba(0, 0, 0, .075); margin: 30px 0 30px 0;height: 60px;width: 470px
+        }
+        .customization{
+            background-color:rgba(0, 0, 0, .075);height: 60px;position: absolute;bottom: 0;width: 470px
+        }
+        .tour-information-wrap,.customization-wrap{
+            padding: 20px 0 20px 0
+        }
+        .price-code,.font-code{
+            float: left
+        }
+        .price-code label{
+            color: #00A2C1;
+        }
+        .order-main{
+            width: 1120px;
+            margin-left: 20px
+        }
+        .order-info{
+            background-color:rgba(0, 0, 0, .075);
+            margin: 30px 0 30px 0;
+            height: 60px;
+            width: 1120px;
+        }
+        .reservation{
+            width: 815px;
+            margin:15px 0 15px 0;
+            position: absolute
+        }
+        .reservation ul li{
+            margin-top: 0;
+            float: left;
+            margin-left: 30px;
+        }
+        .li-order-div{
+            height: 30px;line-height: 30px
+        }
+        .li-order-div input{
+            border: 1px solid #DFDFDF;
+            padding: 8px 10px;
+            outline: none;
+            font-family: 'Open Sans', sans-serif;
+            line-height: normal!important;
+        }
+        .li-order-div select{
+            width: 185px;background-color: transparent;
+        }
+        .go-order{
+            position: absolute;
+            right: 105px;
+            height: 60px;
+            width: 300px;
+
+        }
+        .go-order span{
+            line-height: 30px;
+            float: left;
+            padding: 15px;
+        }
+        .b-btn{
+            margin-top: 0!important;
+            float: right;
+            height: 60px;
+            line-height: 60px;
+            background: #4588d5;
+        }
+        .b-btn a{
+            font-size: 20px;
+            padding: 0 10px!important;
+            line-height: 30px;
+        }
+    </style>
+</head>
+<body>
+<div id="header" xmlns="http://www.w3.org/1999/html">
+    <div class="mfw-header">
+        <div class="header-wrap clearfix">
+            <div class="head-logo">
+                <a class="mfw-logo" title="" href="">
+                    <img src="/images/logo-yantu.png" height="65px" width="65px">
+                </a>
+            </div>
+            <ul class="head-nav" data-cs-t="headnav" id="_j_head_nav">
+                <li class="head-nav-index" data-cs-p="index">
+                    <a href="/index" title="首页">首页</a>
+                </li>
+                <li class="head-nav-place" data-cs-p="mdd">
+                    <a href="/queryPlanList" title="周边跟团游">周边跟团游</a>
+                </li>
+                <li class="head-nav-gonglve" data-cs-p="gonglve">
+                    <a href="/queryScenicList" title="热门景点">热门景点</a>
+                </li>
+                <li class="head-nav-gonglve" data-cs-p="gonglve">
+                    <a href="/privateCustom" title="私人订制">私人订制</a>
+                </li>
+            </ul>
+            <div id="pagelet-block-fdfe14e523864f5d21c81cb8e263dfc7" class="pagelet-block" data-api="apps:user:pagelet:pageViewHeadInfo" data-params="{&quot;type&quot;:1}" data-async="1" data-controller="/js/pageletcommon/pageHeadUserInfoWWWNormal">
+
+            </div>
+        </div>
+        <div class="shadow"></div>
+    </div>
+
+    <!----start-top-nav-script---->
+    <script type="text/javascript" src="/js/responsive-nav.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $(".scroll").click(function(event){
+                event.preventDefault();
+                $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+            });
+        });
+    </script>
+
+</div>
+
+<!--start-team-->
+<div class="team">
+    <div class="container">
+        <div class="team-main">
+            <h3>跟团游详情</h3>
+            <div class="col-md-4 booking-top-left">
+                <div  class="testimonials" id="testimonials">
+                    <div class="wmuSlider example1">
+                        <div class="container-flueid" id="pictureContainer">
+                            <article >
+                                <div class=" cont span_2_of_3 client-main">
+                                    <img  alt="" class="pictureContainerImg">
+                                </div>
+                            </article>
+                            <article >
+                                <div class=" cont span_2_of_3 client-main">
+                                    <img  alt="" class="pictureContainerImg">
+                                </div>
+                            </article>
+                            <article >
+                                <div class=" cont span_2_of_3 client-main">
+                                    <img  alt="" class="pictureContainerImg">
+                                </div>
+                            </article>
+                            <article >
+                                <div class=" cont span_2_of_3 client-main">
+                                    <img  alt="" class="pictureContainerImg">
+                                </div>
+                            </article>
+                            <script src="/js/jquery.wmuSlider.js"></script>
+                            <script>$('.example1').wmuSlider();</script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 booking-top-right" >
+                <h4 id="titlePlan"></h4>
+                <div class="tour-information" >
+                    <div class="tour-information-wrap" >
+                        <div class="price-code">
+                            <span>沿途价格:￥<label id="pricePlan"></label>元/人起</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 about-top-right">
+                    <ul >
+                        <li>产品编号:<label id="idPlan"></label></li>
+                        <li>往返城市:<label>苏州</label>--<label id="cityPlan"></label></li>
+                        <li>游玩天数:<label id="dayPlan"></label><label>天</label></li>
+                        <li>推荐人数:<label id="peoplePlan"></label><label>人</label></li>
+                    </ul>
+                </div>
+                <div class="customization" >
+                    <div class="customization-wrap">
+                        <div class="font-code">
+                            <span>定制旅行  公司、企业、团队定制旅游，您的一站式旅游服务专家</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="order-main">
+            <div class="order-info" >
+                <div class="reservation" >
+                    <ul>
+                        <li >
+                            <div class="li-order-div">
+                                <span>成人:</span>
+                                <select id="adult" >
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                </select>
+                            </div>
+                        </li>
+                        <li >
+                            <div class="li-order-div">
+                                <span>儿童:</span>
+                                <select id="children" >
+                                    <option value="0">0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                </select>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="go-order">
+                    <span id="errorMessageForInput"></span>
+                    <div class="b-btn">
+                        <a href="javascript:saveTourist()">立即预定</a>
+                    </div>
+                </div>
+
+            </div>
+            <div class="order-content">
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+    function saveTourist() {
+        var adultCount = document.getElementById("adult");
+        var childrenCount = document.getElementById("children");
+        var touristCount = parseInt(adultCount.options[adultCount.selectedIndex].value) + parseInt(childrenCount.options[childrenCount.selectedIndex].value);
+        if (parseInt(adultCount.options[adultCount.selectedIndex].value) === 0) {
+            document.getElementById("errorMessageForInput").innerText = "至少一张票!";
+        } else {
+            console.log(touristCount)
+            if (localStorage.getItem("touristInformation") != null) {
+                localStorage.removeItem("touristInformation");
+            }
+            var url = window.location.href;
+            var urlSplit = url.split('/');
+            var id = url.split("/")[urlSplit.length - 1];
+            var touristInformation = {
+                id: id,
+                touristCount: touristCount,
+                type: "/yantu/plan/getPlanDetail/"
+            };
+            localStorage.setItem("touristInformation", JSON.stringify(touristInformation));
+            window.location.href = "/saveTourist";
+        }
+
+    }
+</script>
+
+<div class="advantage">
+    <div class="container">
+        <div class="advantage-main">
+            <h3>详细信息</h3>
+            <div class="main_box">
+                <div class="main_l" style="margin-left: 100px">
+                    <div class="tab_box_contain">
+                        <div class="tab_box" id="tabBox">
+                            <ul>
+                                <li class="tab_ico tab_ico00 at">
+                                    <a href="" ahref="special">产品特色</a>
+                                </li>
+                                <li class="tab_ico tab_ico01">
+                                    <a href="#timeshaftMessage" ahref="trip">行程信息</a>
+                                </li>
+                                <li class="tab_ico tab_ico02">
+                                    <a href="#gobus" ahref="gobus">上车点</a>
+                                </li>
+                                <li class="tab_ico tab_ico03">
+                                    <a href="#price" ahref="price">费用说明</a>
+                                </li>
+                                <li class="tab_ico tab_ico04">
+                                    <a href="#bookDetail" ahref="bookDetail">预订须知</a>
+                                </li>
+                                <li class="tab_ico tab_ico05">
+                                    <a href="#commontProblem" ahref="userComment">常见问题</a>
+                                    <i></i>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="main_con">
+                        <div class="tjbox">
+                            <div class="big-img">
+                            </div>
+                            <div class="small-img">
+                                <div class="small-warp"></div>
+                                <a href="javascript:void(0)" class="mslide-num"></a>
+                            </div>
+                            <span class="previousbtn"></span>
+                            <span class="nextbtn"></span>
+                            <span class="diagoclose"></span>
+                        </div>
+                        <a class="happybusimg" href="">
+                            <img src="/images/yantu-haibao.jpg" width="900px" height="460px">
+                        </a>
+                        <div id="road" class="trip_con"></div>
+                        <div class="detail_trip days_trip J_TrvInfo">
+                            <div id="timeshaftMessage">
+
+                            </div>
+
+                            <div class="detail_tip">
+                                <span>*以上行程仅供参考，最终行程可能会根据实际情况进行微调，敬请以出团通知为准。请根据自身需要谨慎购物，索取发票。</span>
+                            </div>
+                        </div>
+                        <div id="gobus" class="trip_con">
+                            <h5>上车点信息</h5>
+                            <div class="map_box">
+                                <div class="map_con">
+                                    <div class="map_right" style="overflow: hidden; position: relative; z-index: 0; background-color: rgb(243, 241, 236); color: rgb(0, 0, 0); text-align: left;">
+                                        <div style="overflow: visible; position: absolute; z-index: 0; left: 0px; top: 0px">
+                                            <div class="BMap_mask" id="allmap" style="position: absolute; left: 0px; top: 0px; z-index: 9; overflow: hidden; user-select: none; width: 696px; height: 390px;">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="map_left">
+                                        <div class="map_lst">
+                                            <ul>
+                                                <li>
+                                                    <div class="map_detail">
+                                                        <span>1</span><i>西交利物浦大学正门<b>-  江苏,苏州,工业园区</b></i>
+                                                        <div class="map_brief"><p><i>08:00</i></p><dl><dd></dd></dl></div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h6></h6>
+                        <div class="price_infor" id="price">
+                            <div class="con_tit">
+                                <span class="tit">费用说明</span>
+                            </div>
+                            <div class="price_detail">
+                                <dl>
+                                    <dt><h5>费用包含</h5></dt>
+                                    <dd>
+                                        <ul>
+                                            <li>大交通
+                                                <p>往返旅游巴士</p>
+                                                <p>正规旅游用车，保证每人一个座位。大巴车年限五年内，车况干净卫生。司机持驾驶证上岗，驾龄三年以上，熟悉道路情况。</p>
+                                            </li>
+                                            <li>随团服务人员
+                                                <p>全程陪同中文导游服务。</p>
+                                                <p>出团佩戴导游证，有带团经验；行程中组织互动游戏；过往无差评和投诉。</p>
+                                            </li>
+                                            <li>其他费用
+                                                <p>全程无购物</p>
+                                            </li>
+                                            <li>餐食
+                                                <p>餐费自理</p>
+                                            </li>
+                                        </ul>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dt>
+                                        <h5>费用自理</h5>
+                                    </dt>
+                                    <dd>
+                                        <ul>
+                                            <li>补充
+                                                <p>因交通延阻、罢工、天气、飞机、机器故障、航班取消或更改时间等不可抗力原因所导致的额外费用。</p>
+                                                <p>以上“费用包含”中不包含的其它项目。</p><p>建议购买旅游意外险（请在下一步中选择您需要的保险类型）。</p>
+                                            </li>
+                                        </ul>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dt>
+                                        <h5>儿童价说明</h5>
+                                    </dt>
+                                    <dd>
+                                        <ul>
+                                            <li>儿童价标准
+                                                <p>儿童价特殊说明： 儿童与成人同价</p>
+                                            </li>
+                                        </ul>
+                                    </dd>
+                                </dl>
+                            </div>
+                        </div>
+                        <h6></h6>
+                        <div class="price_infor" id="bookDetail">
+                            <div class="con_tit">
+                                <span class="tit">预订须知</span>
+                            </div>
+                            <div class="howtobook">
+                                <h5>如何预订</h5>
+                            </div>
+                            <p class="notice">
+                                <span class="select">1、选择线路</span>
+                                <span class="write">2、填写订单</span>
+                                <span class="pay">3、支付订单</span>
+                                <span class="wait">4、等待确认</span>
+                                <span class="start">5、快乐出游</span>
+                                <span class="comment">6、点评行程</span>
+                            </p>
+                            <div class="book_txt">
+                                <dl>
+                                    <dt><h5>预定说明</h5></dt>
+                                    <dd>
+                                        <p class="bookTitle">预定限制</p>
+                                        <div class="bookLimit">
+                                            <div>
+                                                <span class="type">证件限制（支持以下几种证件类型）：</span>
+                                                <ul>
+                                                    <li>身份证</li>
+                                                    <li>护照</li>
+                                                    <li>台胞证</li>
+                                                    <li>回乡证</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="bookingAlert">
+                                            <p class="bookTitle">预定说明</p>
+                                            <ul>
+                                                <li>出行警示及说明
+                                                    <p>“行程介绍”中涉及的交通时间、游览、停留时间、酒店住宿以当天实际游览为准。</p>
+                                                    <p>如遇节假日出游人数较多，交通拥堵、景区入园、酒店办理入住需排队等候等情况，请您谅解，注意合理安排出游时间。</p>
+                                                    <p>在不减少景点的前提下，如遇到不可抗力变更行程，如天气、交通等问题，导游可与全部游客协商，达成一致意见，并签署书面同意书后临时调整景点的游览顺序或者其他。</p>
+                                                    <p>为了您的安全起见，当您参加有一定危险性的室内或户外活动时，请务必了解当天的天气情况及您个人身体状况是否适宜参加此类项目。同程提醒您注意人身安全。</p>
+                                                    <p>赠送项目因交通、天气等不可抗因素导致不能赠送的、或因您个人原因不能参观的，费用不退。</p>
+                                                </li>
+                                                <li>风险项目警示
+                                                    <p>登山</p>
+                                                </li>
+                                                <li>年龄限制
+                                                    <p>本产品不接受60岁以上(含)客人预订，敬请原谅。</p>
+                                                    <p>12岁以下未成年人需要至少一名家长或成年旅客全程陪同。</p>
+                                                </li>
+                                                <li>成团说明
+                                                    <p>本产品最低成团人数20人，如未达到最低成团人数，同程将在出发前7天内通知不成团，未通知的视为成团。如不成团，同程会为您推荐其他出发班期或更换其他同类产品，如您不接受上述方案，同程将全额退还您支付的费用。</p>
+                                                    <p>出行前1天或当天您将收到出团通知书或导游的确认电话，敬请留意，保持电话畅通。网上集合的时间仅供参考，具体时间请以出团通知书或导游通知为准。</p>
+                                                </li>
+                                                <li>其他
+                                                    <p>本行程为我社委托当地旅行社散客拼团线路，在保证承诺的服务内容和标准不变的前提下，会与其他旅行社的客人拼成一个团统一安排行程；遇到由于未达到约定成团人数不能出团的情况，在行程开始前可能转至其他旅行社所组的旅游团队，具体拼团及转团情况届时我司将及时与游客电话或邮件确认，请游客保持电话畅通。</p>
+                                                    <p>本行程按照签约先后顺序排座位，不受理尽量靠前需求，敬请谅解。</p>
+                                                    <p>出游过程中，如产生退款情况，以退费项目旅行社折扣价为依据，均不以挂牌价为准。</p>
+                                                    <p>本线路为同程自营，车、导、行程等由快乐大巴统一安排，绝不交由其他旅行社散拼团发班，未经允许和说明前，行程安排与页面保持一致，不擅做修改，实际呈现价格和实际支付价格保持一致。若成团后未能出团，免费升级更高标准线路。</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="changeRule">
+                                            <p class="bookTitle">退改规则</p>
+                                            <ul>
+                                                <li>退改规则
+                                                    <p>1、旅游者违约：旅游者在行程开始前7日以内提出解除合同或者按照本合同第十二条第2款约定由旅行社在行程开始前解除合同的，按下列标准扣除必要的费用：行程开始前6日至4日，按旅游费用总额的20%；行程开始前3日至1日，按旅游费用总额的40%；行程开始当日，按旅游费用总额的60%。 2、旅行社违约：旅行社在行程开始前7日以内提出解除合同的，或者旅游者在行程开始前7日以内收到旅行社不能成团通知，不同意转团、延期出行和改签线路解除合同的，旅行社向旅游者退还已收取的全部旅游费用，并按下列标准向旅游者支付违约金：行程开始前6日至4日，支付旅游费用总额10%的违约金；行程开始前3日至1日，支付旅游费用总额15%的违约金；行程开始当日，支付旅游费用总额20%的违约金。</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </dd>
+                                </dl>
+                                <dl>
+                                    <dt>
+                                        <h5>温馨提示</h5>
+                                    </dt>
+                                    <dd>
+                                        <p>本产品由同程国旅或其关联公司旅行社及具有资质的合作旅行社提供相关服务。</p>
+                                        <p>温馨提示</p>
+                                        <p>1.本产品由同程国旅或其关联公司旅行社及具有资质的合作旅行社提供相关服务。</p>
+                                        <p><b>【定制旅行】团队出游，点击<a href="https://www.ly.com/public/dingzhiyou" class="tcTraObj" tctotype="shorttour_PC_ToGroup2" tctoname="PC产品详情包团定制2" tctovalue="11">【提交需求】</a>，详情咨询4007-777-777</b></p>
+                                    </dd>
+                                </dl>
+                                <dl><dt><h5>发票说明</h5></dt>
+                                    <dd><p>1、参与同程网周边跟团游并成功出游的客户回团后均可申请开具旅游发票<br>2、发票类型：个人或公司<br>3、开票项目：旅游服务<br>4、您需在回团后联系客服确认发票抬头、内容、邮寄地址等信息<br>5、回团后，我司收到客户开票申请将于５－７个工作日给您寄送增值税普通发票</p></dd>
+                                </dl>
+                                <dl><dt><h5>安全须知</h5></dt>
+                                    <dd>
+                                        <p>为了增强旅游者安全意识，普及旅游安全基本常识，普及文明行为公约指南，使旅游者参加旅游活动的计划能圆满、愉快、顺利完成，请您仔细阅读
+                                            <a href="https://www.ly.com/newhelp/questionlist/18-1.html" style="color:#005bb5" target="_blank">安全指南及文明行为公约指南</a>。
+                                            <b>以下为部分内容摘要：</b>
+                                        </p>
+                                        <p class="text_box">一、出发前准备事项<br>1. 旅游者在临行前应考虑自身身体状况，必要时旅行前须征得医生同意后方可动身。如有体质较弱或者曾患病的旅游者必须坚持治疗，防止旧病复发。老年人往往患有多种慢性病，平时需要用药治疗者，出游时切不可遗忘服药，否则，可能导致旧病复发、病情加重或恶化。临行前，旅游者应根据自己的身体状况随身携带一些必备的药品及常用药品（如感冒药、止泻药、晕车药等），境外药房只能依处方购买药品。<br>
+                                            2. 到野生动物保护区游览，应尽量穿中性颜色衣服，如棕色、米色或土黄色；白色和其他鲜艳的颜色会令动物不安。<br>
+                                            3. 临行前安排好家中相应事宜，把旅游线路、旅行社紧急联系人等信息告诉自己家人，同时，也可将自己家人的紧急联系方式告知旅行社。<br>
+                                            4. 请旅游者务必带上身份证等有效证件、个人旅行用品、车船票、飞机票，准时到达约定的集合地点，请勿迟到。有些景区景点对于军人、老人、儿童、残疾人士有一定优惠，请旅游者提前向导游出示证件以便导游购买优惠门票，如购买门票后再向导游出示，将不能享受优惠。<br>
+                                            二、行程中注意事项<br>
+                                            （一）乘坐交通工具注意事项<br>1. 黄金周或者其他旅游旺季期间，由于国内航班中加班机、包机的数量大增，极易引起航班的延误，如遇此种情况，请旅游者在候机厅耐心等待，密切注意航班的信息，不要到处乱跑，以免误机。同时，航空公司因运力等因素有可能临时调整航班，敬请旅游者配合与谅解。<br>
+                                            2. 旅游者乘坐交通工具时，应系好安全带，在交通工具停稳后方可离开；上下交通工具时，须排队等候，讲究文明礼貌，并优先照顾老人、儿童、妇女，切勿拥挤，以免发生意外。<br>
+                                            3. 旅游者乘坐交通工具时，请不要与司机交谈和催促司机开快车，不要将头、手、脚或者行李物品伸出窗外，以防意外发生；不要向车窗外扔废（杂）物品，特别是硬质物品，以免伤害他人。<br>
+                                            4. 旅游者下车游览、就餐、购物时，请注意关好旅游车窗并随身携带贵重物品。<br>
+                                            5. 旅游者乘坐飞机时，应随身携带有效身份证（小孩应带户口本原件，年满16 周岁未办理身份证的旅游者须持派出所证明原件）。<br>
+                                            6. 搭乘快艇、漂流木筏、参加水上活动时，请旅游者按规定穿着救生衣，并遵照工作人员的指导。乘坐快艇游玩时，所有旅游者请抓紧扶手，年幼或者年长者请不要坐船头，以免发生不测。途中严禁追跑打闹。<br>
+                                            7. 乘机、坐车、乘船时要注意扶梯，在台阶处站稳。乘车时注意颠簸路段及司机急刹车，以免扭伤或摔伤身体。带儿童的游客乘坐交通工具时要特别注意儿童的安全。<br>
+                                            （二）住宿注意事项<br>
+                                            1. 抵达酒店后，旅游者须听从导游安排；酒店住宿以两人一室、自由组合为原则，如出现单男单女，本公司将调换夫妻用房或者调整为三人房；随行的小孩12 周岁以上才能占床，请旅游者谅解。如果旅游者特别指定单人房间，请于出行前支付单人房差额并取得本公司的确认，以免出行后产生纷争。<br>
+                                            2. 旅游者入住酒店后，应了解酒店安全须知，熟悉酒店的太平门、安全出路、安全楼梯的位置及安全转移的路线。<br>
+                                            3. 沐浴时地面、浴缸容易打滑，一定要把防滑垫放好以防滑倒摔伤，酒后不要沐浴，更不要蒸洗桑拿浴。<br>
+                                            4. 不要将自己住宿的酒店、房号随便告诉陌生人，不要让陌生人或者自称酒店的维修人员随便进入客房，出入客房要锁好房门，睡觉前注意门窗是否关好，保险锁是否锁上；贵重物品请放置酒店保险箱，注意保管好收据，如随身携带请注意妥善保管。<br>
+                                            5. 如遇紧急情况请勿慌张：发生火警时请勿搭乘电梯或者随意跳楼，应镇定判断火情，主动实行自救；若身上着火，可就地打滚，或者用重衣物压火苗；必须穿过有浓烟的走廊、通道时，用浸湿的衣物披裹身体、捂着口鼻，贴近地、顺墙爬行；大火封门无法逃出时，可采用浸湿的衣物披裹身体、被褥堵门缝或者泼水降温的方法等待救援，或者摇动色彩鲜艳的衣物呼唤救援人员。<br>
+                                            （三）饮食卫生注意事项<br>
+                                            1. 外出旅游，旅游者应注意身体健康，切勿吃生食、生海鲜、未剥皮的水果，不可光顾路边无牌照摊档，忌暴饮暴食，应多喝开水，多吃蔬菜水果，少抽烟，少喝酒。因私自食用不洁食品和海鲜引起的肠胃疾病旅行社不承担责任。<br>
+                                            2. 不要随意接受和食用陌生人赠送的香烟、食物和饮品，防止他人暗算。<br>
+                                            3. 为防止旅途中水土不服，旅游者应自备一些常用药品以备不时之需，切勿随意服用他人提供的药品。<br>
+                                            4. 如对饮食有特殊要求，请在报名时告知旅行社并提前与导游说明，以便导游更好的给您安排饮食。<br>
+                                            5. 旅游者品尝涮食时，为避免烫伤，待食物稍微凉却一下后再食用。使用酒精炉加热的，如需添加酒精，由酒店工作人员关闭火源后添加，请旅游者切勿自行添加；使用燃气加热的，旅游者严禁抽烟或将明火靠近火源，以免引起爆炸，带来不必要的伤亡。<br>
+                                            （四）购物注意事项<br>
+                                            1. 请勿轻信流动推销人员的商品推荐。由于小摊位物品真伪及质量难以保障，尽量不要在小摊位购买物品。如必须购买，请看好再与商家讨价。<br>
+                                            2. 购物时，请注意商品质量及价格，并向商家索取正式发票。<br>
+                                            3. 非旅行社指定购物点，旅游者消费属个人行为，如产生纠纷，旅行社可协助处理，但不承担任何责任。<br>
+                                            三、温馨提醒<br>
+                                            1. 为了确保旅行团顺利出行，防止旅途中发生人身意外伤害事故，请旅游者在出行前做一次必要的身体检查，80 岁以上老人或存在下列健康问题的病患者，请勿报名，如隐瞒参团发生事故，责任自负：<br>
+                                            1) 传染性疾病患者，如传染性肝炎、活动期肺结核、伤寒等传染病人；<br>
+                                            2) 心血管疾病患者，如严重高血压、心功能不全、心肌缺氧、心肌梗塞等病人；<br>
+                                            3) 脑血管疾病患者，如脑栓塞、脑出血、脑肿瘤等病人；<br>
+                                            4) 呼吸系统疾病患者，如肺气肿、肺心病等病人；<br>
+                                            5) 精神病患者，如癫痫及各种精神病人；<br>
+                                            6) 严重贫血病患者，如血红蛋白量水平在 50 克 / 升以下的病人；<br>
+                                            7) 大中型手术的恢复期病患者；<br>
+                                            8) 孕妇及行动不便者。<br>
+                                            2. 60 岁（含）以上70 岁以下老年人报名出游的，需填写《健康证明》后方可报名，70 岁（含）以上老年人需有家属陪同方可出游；未成年人需由父母或由父母指定的临时监护人陪同，如同行人员中有未成年人无父母陪同出游的，同行的成年出游人均视为未成年人的临时监护人，负责全程看管、照顾。<br>
+                                            为提高公民文明素质，塑造中国公民良好国际形象，中央文明办、国家旅游局今天联合颁布《中国公民国内旅游文明行为公约》。<br>
+                                            《中国公民国内旅游文明行为公约》<br>营造文明、和谐的旅游环境，关系到每位游客的切身利益。做文明游客是我们大家的义务，请遵守以下公约：<br>1、维护环境卫生。不随地吐痰和口香糖，不乱扔废弃物，不在禁烟场所吸烟。<br>
+                                            2、遵守公共秩序。不喧哗吵闹，排队遵守秩序，不并行挡道，不在公众场所高声交谈。<br>
+                                            3、保护生态环境。不踩踏绿地，不摘折花木和果 实，不追捉、投打、乱喂动物。<br>
+                                            4、保护文物古迹。不在文物古迹上涂刻，不攀爬触摸文物，拍照摄像遵守规定。<br>
+                                            5、爱惜公共设施。不污损客房用品，不损坏公用设施，不贪占小便宜，节约用水用电，用餐不浪费。<br>
+                                            6、尊重别人权利。不强行和外宾合影，不对着别人打喷嚏，不长期占用公共设施，尊重服务人员的劳动，尊重各民族宗教习俗。<br>
+                                            7、讲究以礼待人。衣着整洁得体，不在公共场所袒胸赤膊；礼让老幼病残，礼让女士；不讲粗话。<br>
+                                            8、提倡健康娱乐。抵制封建迷信活动，拒绝黄、赌、毒。<br>
+                                        </p>
+
+                                    </dd>
+                                </dl>
+                            </div>
+                        </div>
+                        <h6></h6>
+                        <div class="price_infor" id="commontProblem">
+                            <div class="con_tit">
+                                <span class="tit">常见问题</span>
+                            </div>
+                            <div class="answer">
+                                <ol>
+                                    <li><p>线路包含哪些内容，有没有另外付费的项目呢？</p>
+                                        <div>客官您好，每条线路包含情况都有所不同，具体的包含内容您可以直接在该线路的“费用说明”以及“预订须知”中查看哦。如有疑问可咨询人工客服（上班时间8:00-22:30），或者电话客服（上班时间7:00-22:30）。</div>
+                                    </li>
+                                    <li><p>行程中的购物点是否强制消费？</p>
+                                        <div>客官您好，周边跟团游线路所有购物点都不强制消费，您可根据自身需要选择消费，并且索要发票。</div>
+                                    </li>
+                                    <li><p>儿童需要占座吗？</p>
+                                        <div>客官您好，根据国家规定，乘坐旅游大巴无论成人还是儿童均需要占座哦。具体儿童需要购买儿童价还是成人价，可查看线路的“费用说明”，根据儿童的身高标准选择票型哦。</div>
+                                    </li>
+                                </ol>
+                                <ol class="none">
+                                    <li><p>单房差是什么？房差是多少？</p>
+                                        <div>客官您好，行程中如果包含住宿，客人想要自己独立一间的需要补单房差哦，具体的房差需要帮您核实，您可以咨询人工在线客服（上班时间：8:00-22:30）或者拨打4007777777转1转4再转1哦（上时间7:00-22:30）。</div>
+                                    </li>
+                                    <li><p>跟团产品需要提前几天预定？</p>
+                                        <div>客官您好，建议您提前3-5天预定哦，如果需要预定第二天出游的线路建议您咨询在线人工客服（工作时间8:00-22:30）或者电话客服（7:00-22:30）帮您核实是否有余位哦。</div>
+                                    </li>
+                                    <li><p>我的订单确认可以出游吗？</p>
+                                        <div>客官您好，客服人员一般会在出游前两、三天左右跟旅行社确认能否成团，①如果可以成团导游将在出游前一天18:00-22:00与您联系，请您保持手机畅通；②如果不能成团，会有专业客服与您取得联系，帮您改期或者办理全额退款。</div>
+                                    </li>
+                                </ol>
+                                <ol class="none">
+                                    <li><p>我需要在什么时候、在哪里集合？</p>
+                                        <div>客官您好，具体的出发时间以及集合地点信息，在预定须知以及行程简介里有说明哦，如有疑问可咨询人工客服（上班时间8:00-22:30），或者电话客服（上班时间7:00-22:30）。</div>
+                                    </li>
+                                    <li><p>导游会在什么时候联系我？</p>
+                                        <div>客官您好，导游一般会在出游前一天的18:00-22:00之间电话或者短信通知您，若未接到导游联系，请及时拨打4007777777-1-4-1，客服专员会帮您联系导游。</div>
+                                    </li>
+                                    <li><p>游玩结束后如何点评我的周边跟团游订单？</p>
+                                        <div>客官您好，使用同程APP进入 “我的同程”&gt;“待点评”&gt; 进行点评操作，发表点评后会返还点评奖金到您点评奖金账户。</div>
+                                    </li>
+                                </ol>
+                            </div>
+                            <div class="nav1">
+                                <a href="javascript:void(0)"><span class="active"></span></a>
+                                <a href="javascript:void(0)"><span></span></a>
+                                <a href="javascript:void(0)"><span></span></a>
+                            </div>
+                        </div>
+                        <div class="popOutBox none" id="popOut">
+                            <div class="popCon photo-album">
+                                <div class="popc-con"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--end-team-->
+<!---strat-date-piker---->
+<link rel="stylesheet" href="/css/jquery-ui.css" />
+<script src="/js/jquery-ui.js"></script>
+<script>
+    $(function() {
+        $( "#datepicker,#datepicker1" ).datepicker();
+    });
+</script>
+<!---/End-date-piker---->
+
+<!---pop-up-box---->
+<script type="text/javascript" src="/js/modernizr.custom.min.js"></script>
+<link href="/css/popup-box.css" rel="stylesheet" type="text/css" media="all"/>
+<script src="/js/jquery.magnific-popup.js" type="text/javascript"></script>
+<!---//pop-up-box---->
+<div id="small-dialog" class="mfp-hide" style="z-index: 1000">
+    <div class="login">
+        <h3>登录</h3>
+        <h4 id="loginErrorMessage"></h4>
+        <a class="play-icon popup-with-zoom-anim" href="#small-dialog1" style="float: right;padding-right:50px;">验证码登录</a>
+        <input type="text" value="Cellphone" id="loginCellphone" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Cellphone';}" />
+        <input type="password" value="Password" id="loginPassword" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}"/>
+        <input type="submit" value="登录" onclick="login()" />
+    </div>
+    <a  href="forgetPassword" style="padding-right: 200px">忘记密码</a>
+    <a class="play-icon popup-with-zoom-anim" href="#small-dialog2" style="float: right;padding-right: 50px">没有账号?去注册</a>
+</div>
+<div id="small-dialog1" class="mfp-hide" style="z-index: 1000">
+    <div class="login">
+        <h3>登录</h3>
+        <h4 id="loginCodeErrorMessage"></h4>
+        <a class="play-icon popup-with-zoom-anim" href="#small-dialog" style="float: right;padding-right:50px;">账号密码登录</a>
+        <input type="text" value="Cellphone" id="loginCellphoneByCode" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Cellphone';}" />
+        <input type="text" value="验证码" id="loginCode" class="code" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '验证码';}"/>
+        <input type="submit" value="   获取验证码   " onclick="code(this)" id="getCode" />
+        <input type="submit" value="登录" onclick="loginByCode(this)" />
+    </div>
+    <a class="play-icon popup-with-zoom-anim" href="#small-dialog2" style="float: right;padding-right: 50px">没有账号?去注册</a>
+</div>
+<div id="small-dialog2" class="mfp-hide" style="z-index: 1000">
+    <div class="signup">
+        <h3>注册</h3>
+        <h4 id="signUpErrorMessage"></h4>
+        <a class="play-icon popup-with-zoom-anim" href="#small-dialog" style="float: right;padding-right:50px;">已有账号?去登录</a>
+        <input type="text" id="signUpCellphone" class="cellphone"value="cellphone" onfocus="this.value = '';" onblur="if (this.value === '') {this.value = 'cellphone';}"  />
+        <input type="password" id="signUpPassword" value="Password" onfocus="this.value = '';" onblur="if (this.value === '') {this.value = 'Password';}"/>
+        <input type="password" id="signUpEnterPassword" value="Password" onfocus="this.value = '';" onblur="if (this.value === '') {this.value = 'signUpPassword';}if (this.value !== document.getElementById('signUpPassword').value) {document.getElementById('signUpErrorMessage').innerText='两次密码不一致哦';} "/>
+        <input type="submit"  value="注册" onclick="signUp()"/>
+    </div>
+</div>
+<script>
+    $(document).ready(function() {
+        $('.popup-with-zoom-anim').magnificPopup({
+            type: 'inline',
+            fixedContentPos: false,
+            fixedBgPos: true,
+            overflowY: 'auto',
+            closeBtnInside: true,
+            preloader: false,
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-zoom-in'
+        });
+    });
+    var xhr = null;
+    function login() {
+        if (window.XMLHttpRequest) {
+            xhr = new XMLHttpRequest();
+        } else {
+            xhr = new ActiveXObject('Microsoft.XMLHTTP');
+        }
+        var url_login = "/yantu/login/login";
+        var cellphone = document.getElementById("loginCellphone").value;
+        var password =  document.getElementById("loginPassword").value;
+        var objData = {
+            cellphone : cellphone,
+            password : password
+        };
+        var jsonData = JSON.stringify(objData);
+        console.log(objData)
+        xhr.open("POST", url_login, true);
+        xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+        xhr.onreadystatechange =  function () {
+            if(xhr.readyState===4 && xhr.status ===200 ){
+                var result= JSON.parse(xhr.responseText);
+                localStorage.setItem('loginMessage',JSON.stringify({data:xhr.responseText,time:new Date().getTime()}));
+                console.log(localStorage.getItem('loginMessage'));
+                if(result.status ===1){
+                    var arrayClose = document.getElementsByClassName("mfp-close");
+                    for(var i=0;i<arrayClose.length;i++){
+                        arrayClose[i].click();
+                    }
+                    document.getElementById("showPortrait").style.backgroundImage= "url("+result.data.visitorPortrait+")";
+                    document.getElementById("loginA").style.display = "none";
+                    document.getElementById("logoutA").style.display = "block";
+                    document.getElementById("switchMemberA").style.display ="block";
+                    document.getElementById("modifyPasswordA").style.display ="block";
+                    document.getElementById("modifyInformationA").style.display ="block";
+                    document.getElementById("orderManageA").style.display ="block";
+                }else{
+                    document.getElementById("loginErrorMessage").innerText=result.msg;
+                    document.getElementById("loginErrorMessage").style.color="red";
+                    localStorage.removeItem('loginMessage');
+                }
+            }
+        };
+        xhr.send(jsonData);
+    }
+    var wait = 60;
+    function code(obj) {
+        if (window.XMLHttpRequest) {
+            xhr = new XMLHttpRequest();
+        } else {
+            xhr = new ActiveXObject('Microsoft.XMLHTTP');
+        }
+        var url_code = "/yantu/login/code";
+        var cell =  document.getElementById("loginCellphoneByCode").value;
+        var objCode = {
+            cellPhone : document.getElementById("loginCellphoneByCode").value
+        };
+
+        console.log(cell);
+        console.log(objCode);
+        var jsonCode = JSON.stringify(objCode);
+        xhr.open("POST", url_code, true);
+        xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+        xhr.onreadystatechange =  function () {
+            if(xhr.readyState===4 && xhr.status ===200 ){
+                var result = xhr.responseText;
+                if(result !== null){
+                    localStorage.setItem("loginCode",result);
+                }else{
+                    document.getElementById("loginCodeErrorMessage").innerText="验证码未知错误";
+                    document.getElementById("loginCodeErrorMessage").style.color="red";
+
+                }
+            }
+        };
+        xhr.send(jsonCode);
+        time(obj);
+    }
+    function time(obj) {
+        if (wait === 0) {
+            obj.removeAttribute("disabled");
+            obj.value="   获取验证码   ";
+            wait = 60;
+        } else {
+            obj.setAttribute("disabled", true);
+            obj.value=wait+"秒后重新发送";
+            wait--;
+            console.log(wait)
+            t=setTimeout(function() {
+                time(obj)
+            }, 1000)
+        }
+    }
+    function loginByCode(obj) {
+        wait = 60;
+        clearTimeout(t);
+        document.getElementById("getCode").removeAttribute("disabled");
+        document.getElementById("getCode").value = "   获取验证码   ";
+        console.log(localStorage.getItem("loginCode"));
+        if(document.getElementById("loginCode").value === localStorage.getItem("loginCode")){
+            if (window.XMLHttpRequest) {
+                xhr = new XMLHttpRequest();
+            } else {
+                xhr = new ActiveXObject('Microsoft.XMLHTTP');
+            }
+            var url_login = "/yantu/login/login";
+            var cellphone = document.getElementById("loginCellphoneByCode").value;
+            var verificationCode =  document.getElementById("loginCode").value;
+            var objData = {
+                cellphone : cellphone,
+                verificationCode : verificationCode
+            };
+            console.log(objData);
+            var jsonData = JSON.stringify(objData);
+            xhr.open("POST", url_login, true);
+            xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+            xhr.onreadystatechange =  function () {
+                if(xhr.readyState===4 && xhr.status ===200 ){
+                    var result= JSON.parse(xhr.responseText);
+                    console.log(result);
+                    localStorage.setItem('loginMessage',JSON.stringify({data:xhr.responseText,time:new Date().getTime()}));
+                    if(result.status ===1){
+                        var arrayClose = document.getElementsByClassName("mfp-close");
+                        for(var i=0;i<arrayClose.length;i++){
+                            arrayClose[i].click();
+                        }
+                        document.getElementById("showPortrait").style.backgroundImage= "url("+result.data.visitorPortrait+")";
+                        document.getElementById("loginA").style.display = "none";
+                        document.getElementById("logoutA").style.display = "block";
+                        document.getElementById("switchMemberA").style.display ="block";
+                        document.getElementById("modifyPasswordA").style.display ="block";
+                        document.getElementById("modifyInformationA").style.display ="block";
+                        document.getElementById("orderManageA").style.display ="block";
+                    }else{
+                        document.getElementById("loginCodeErrorMessage").innerText=result.msg;
+                        document.getElementById("loginCodeErrorMessage").style.color="red";
+                        localStorage.removeItem('loginMessage');
+                    }
+                }
+            };
+            xhr.send(jsonData);
+        }else {
+            document.getElementById("loginCodeErrorMessage").innerText="验证码输入错误";
+            document.getElementById("loginCodeErrorMessage").style.color="red";
+        }
+
+    }
+    function signUp() {
+        if (window.XMLHttpRequest) {
+            xhr = new XMLHttpRequest();
+        } else {
+            xhr = new ActiveXObject('Microsoft.XMLHTTP');
+        }
+        var url_register = "/yantu/visitor/register";
+        var cellphone = document.getElementById("signUpCellphone").value;
+        var password =  document.getElementById("signUpPassword").value;
+        var objData = {
+            cellphone : cellphone,
+            password : password
+        };
+        var jsonData = JSON.stringify(objData);
+        xhr.open("POST", url_register, true);
+        xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+        xhr.onreadystatechange =  function () {
+            if(xhr.readyState===4 && xhr.status ===200 ){
+                var result= JSON.parse(xhr.responseText);
+                console.log(result);
+                if(result.status ===1){
+                    localStorage.removeItem('signUpMessage');
+                    localStorage.setItem('signUpMessage',JSON.stringify({data:xhr.responseText,time:new Date().getTime()}));
+                    window.location.href = "perfectInformation";
+                }else{
+                    document.getElementById("signUpErrorMessage").innerText=result.msg;
+                    document.getElementById("signUpErrorMessage").style.color="red";
+                    localStorage.removeItem('signUpMessage');
+                }
+            }
+        };
+        xhr.send(jsonData);
+    }
+</script>
+<!--End-pop-up-box-->
+
+<!--start-footer-->
+<div class="footer">
+    <div class="container">
+        <div class="footer-main">
+            <div class="col-md-5 footer-left">
+                <p>联系我们</p>
+                <ul>
+                    <li><a href="#"><span class="twt"> </span></a></li>
+                    <li><a href="#"><span class="fb"> </span></a></li>
+                    <li><a href="#"><span class="p"> </span></a></li>
+                    <li><a href="#"><span class="yt"> </span></a></li>
+                    <li><a href="#"><span class="in"> </span></a></li>
+                </ul>
+                <p>地址 苏州市创新科技园</p>
+                <p>官方邮箱 <a href="crazylemon@gmail.com"> crazylemon@gmail.com</a></p>
+                <p>官方电话  +86 17678627809</p>
+            </div>
+            <div class="col-md-7 footer-right">
+                <h4>给我们的建议</h4>
+                <span>
+						<input type="text"  value="请在这里留下您的宝贵建议" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '请在这里留下您的宝贵建议';}">
+						<input type="submit" value="提交">
+					</span>
+                <ul>
+                    <li><a href="/index">首页</a></li>
+                    <li><a href="/queryPlanList">周边跟团游</a></li>
+                    <li><a href="/queryScenicList">热门景点</a></li>
+                    <li><a href="/privateCustom">私人订制</a></li>
+                    <li><a class="play-icon popup-with-zoom-anim" href="#small-dialog">登录</a></li>
+                    <li><a class="play-icon popup-with-zoom-anim" href="#small-dialog2">注册</a></li>
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        <div class="footer-text">
+            <p>Copyright &copy; 2018-crazylemon项目组-沿途旅行</p>
+        </div>
+    </div>
+    <a href="#header" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover"
+                                                                               style="opacity: 1;"> </span></a>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <div class="btn-group" style="z-index: 1000" >
+        <a id="showPortrait" href="javascript:showFrame()" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  onblur="document.getElementById('showFrameDiv').style.display='none'" style="display: block;"> <span id="toTopl" style="opacity: 1;"> </span></a>
+        <div class="dropdown-menu" id="showFrameDiv" style="display: none;position: absolute;">
+            <a class="dropdown-item" href="javascript:window.location.href='/modifyInformation'" id="modifyInformationA" style="display: none;width: 100%;padding: .25rem 1.5rem;clear: both;font-weight: 400;color: #212529;text-align: center;white-space: nowrap;background-color: transparent;border: 0;">修改资料</a>
+            <a class="dropdown-item" href="javascript:window.location.href='/modifyPassword'" id="modifyPasswordA" style="display: none;width: 100%;padding: .25rem 1.5rem;clear: both;font-weight: 400;color: #212529;text-align: center;white-space: nowrap;background-color: transparent;border: 0;">修改密码</a>
+            <a class="dropdown-item" href="javascript:window.location.href='/orderManager'" id="orderManageA" style="display: none;width: 100%;padding: .25rem 1.5rem;clear: both;font-weight: 400;color: #212529;text-align: center;white-space: nowrap;background-color: transparent;border: 0;">订单管理</a>
+            <a class="dropdown-item" href="javascript:switchMember()" id="switchMemberA" style="display: none;width: 100%;padding: .25rem 1.5rem;clear: both;font-weight: 400;color: #212529;text-align: center;white-space: nowrap;background-color: transparent;border: 0;">切换账号</a>
+            <a class="dropdown-item" href="javascript:logout()" id="logoutA" style="display: none;width: 100%;padding: .25rem 1.5rem;clear: both;font-weight: 400;color: #212529;text-align: center;white-space: nowrap;background-color: transparent;border: 0;">退出</a>
+            <a class="play-icon popup-with-zoom-anim" href="#small-dialog" id="loginA" style="display: block;width: 100%;padding: .25rem 1.5rem;clear: both;font-weight: 400;color: #212529;text-align: center;white-space: nowrap;background-color: transparent;border: 0;"><span>登录 </span></a>
+        </div>
+    </div>
+    <script>
+        function showFrame() {
+            document.getElementById("showFrameDiv").style.display = "";
+        }
+        function logout() {
+            if (window.XMLHttpRequest) {
+                xhr = new XMLHttpRequest();
+            } else {
+                xhr = new ActiveXObject('Microsoft.XMLHTTP');
+            }
+            var url_logout = "/yantu/login/logout";
+            xhr.open("GET", url_logout, true);
+            xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+            xhr.onreadystatechange =  function () {
+                if(xhr.readyState===4 && xhr.status ===200 ){
+                    console.log(xhr.responseText)
+                    if(xhr.responseText !==null){
+                        localStorage.removeItem('loginMessage');
+                        window.location.href = "index";
+                    }
+                }
+            };
+            xhr.send();
+        }
+        function switchMember() {
+            if (window.XMLHttpRequest) {
+                xhr = new XMLHttpRequest();
+            } else {
+                xhr = new ActiveXObject('Microsoft.XMLHTTP');
+            }
+            var url_logout = "/yantu/login/logout";
+            xhr.open("GET", url_logout, true);
+            xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+            xhr.onreadystatechange =  function () {
+                if(xhr.readyState===4 && xhr.status ===200 ){
+                    console.log(xhr.responseText)
+                    if(xhr.responseText !==null){
+                        localStorage.removeItem('loginMessage');
+                        document.getElementById("loginA").click();
+                    }
+                }
+            };
+            xhr.send();
+        }
+    </script>
+</div>
+<!--end-footer-->
+<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540'  language='JavaScript' charset='gb2312'></script></div>
+</body>
+</html>

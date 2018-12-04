@@ -1,0 +1,1353 @@
+div {
+    display: block;
+}
+.both {
+    width: 100%;
+    font-family: 'Exo', sans-serif;
+}
+/*body {*/
+    /*color: #333;*/
+    /*font: normal normal normal 12px/20px Arial,sans-serif;*/
+/*}*/
+ul, menu, dir {
+    display: block;
+    list-style-type: disc;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+ul{
+    margin: 0;
+    padding: 0;
+}
+ol {
+    display: block;
+    list-style-type: decimal;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    padding-inline-start: 40px;
+}
+a {
+    /*color: #005bb5;*/
+    text-decoration: none;
+    outline: 0;
+}
+li {
+    list-style: none;
+
+}
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+#commontProblem li div, #commontProblem li p, #id-next, #id-previous, .J_Cal_Next, .J_Cal_Prev, .btn-next b, .btn-prev b, .citylist i, .con_tit .tit, .dataNum, .detail_click, .dialog04 i, .dialog04 i.current, .dpList li:after, .dpList li:before, .main_con h3 a, .main_con h3 i, .onetr i, .p_plus, .p_reduce, .pa-l, .pa-r, .popClose, .price_code p:after, .price_infor .book_txt dl dd .see_more font, .rotate i, .stairslist b, .tab_ico i, .un_plus, .un_reduce ,h5{
+    background: url(//file.40017.cn/dujia/img/touch/cn/holiday/tchoutput/img/bustour/pc/bustour_detail/newDetail.png) no-repeat;
+}
+
+/***************************************************/
+.main_box {
+    margin-top: 30px;
+    width: 1200px;
+    padding-bottom: 20px;
+    clear: both;
+}
+/************ 左半部分 ***************************************/
+.main_box .main_l {
+    float: left;
+    width: 940px;
+    background-color: white;
+    box-shadow: 0 1px 20px 0 #ccc;
+}
+/********** 左-顶部导航栏 *****************************************/
+.tab_box_contain {
+    height: 50px;
+}
+element.style {
+    left: 0px;
+    position: relative;
+    top: 0px;
+}
+/*.tab_box {*/
+    /*position: relative;*/
+    /*z-index: 100;*/
+/*}*/
+.tab_box, .tab_box ul {
+    width: 940px;
+    float: left;
+    clear: both;
+}
+.tab_box ul {
+    background: #8c96a2;
+}
+
+.tab_box ul li.at {
+    background: #fff;
+}
+.tab_box ul li {
+    float: left;
+    height: 48px;
+    margin-top: 2px;
+    line-height: 48px;
+}
+.tab_ico {
+    position: relative;
+}
+.tab_box ul li:first-child a {
+    border: none;
+}
+.tab_box ul li.at a {
+    color: #50b400;
+    /*border-left: #fff;*/
+}
+.tab_box ul li a {
+    display: inline-block;
+    width: 120px;
+    height: 18px;
+    font-size: 16px;
+    line-height: 18px;
+    color: #fff;
+    text-align: center;
+    vertical-align: middle;
+    border-left: 1px solid #c6cbd1;
+}
+
+.tab_box ul li.at {
+     background: #fff;
+}
+.tab_box ul li {
+    float: left;
+    height: 47px;
+    margin-top: 2px;
+    line-height: 48px;
+}
+.tab_ico {
+    position: relative;
+}
+/************* main_con ****************************************/
+.main_con {
+    float: left;
+    width: 900px;
+    padding: 0 20px;
+    clear: both;
+    background: #fff;
+}
+.tjbox {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    display: none;
+    width: 600px;
+    margin-top: -203px;
+    margin-left: -300px;
+    background: #fff;
+}
+.big-img {
+    height: 320px;
+    overflow: hidden;
+}
+.small-img {
+    position: relative;
+    height: 72px;
+    padding-top: 12px;
+    background: #262a31;
+}
+.small-img .small-warp {
+    width: 490px;
+    overflow: hidden;
+}
+.mslide-num {
+    right: 0;
+    width: 108px;
+    height: 84px;
+    font-size: 28px;
+    line-height: 84px;
+    color: #fff;
+    text-align: center;
+}
+
+.diagoclose, .mslide-num {
+    position: absolute;
+    top: 0;
+}
+.previousbtn {
+    left: 0;
+    background-position: 6px 16px;
+}
+.nextbtn {
+    right: 0;
+    background-position: -77px 16px;
+}
+.nextbtn, .previousbtn {
+    position: absolute;
+    top: 126px;
+    width: 30px;
+    height: 70px;
+    cursor: pointer;
+    background-color: #000;
+    filter: alpha(opacity=50);
+    opacity: .5;
+}
+
+.diagoclose {
+    right: -30px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    background-color: #262a31;
+    background-position: 7px -102px;
+    border-radius: 0 18px 18px 0;
+}
+.diagoclose, .mslide-num {
+    position: absolute;
+    top: 0;
+}
+.diagoclose, .nextbtn, .previousbtn {
+    background-image: url(//file.40017.cn/dujia/img/touch/cn/holiday/tchoutput/img/bustour/pc/bustour_detail/tj_photo.png);
+    background-repeat: no-repeat;
+}
+/********* 产品特色 **************************************/
+.trip_con {
+    float: left;
+    width: 900px;
+    clear: both;
+}
+.main_con span {
+    position: relative;
+    padding: 0;
+    font-family: "Microsoft YaHei";
+    font-size: 18px;
+    line-height: 22px;
+    color: #50b400;
+    border-bottom: 1px dashed #ddd;
+}
+.main_con span i {
+    position: absolute;
+    top: 23px;
+    left: 0;
+    width: 30px;
+    height: 29px;
+    background-position: -3px -168px;
+}
+.main_con span a {
+    position: relative;
+    height: 16px;
+    padding-right: 22px;
+    padding-left: 20px;
+    font-size: 12px;
+    line-height: 16px;
+    color: #0185c6;
+    background-position: -340px -1078px;
+}
+/************ 行程信息 *****************************************/
+.scheduleTab {
+    margin: 15px 0 40px;
+}
+.scheduleTab li:first-child {
+    padding: 0 10px 0 0;
+    border-right: 1px solid #ddd;
+}
+.scheduleTab li {
+    float: left;
+}
+.scheduleTab li a {
+    display: inline-block;
+    width: 104px;
+    height: 16px;
+    padding: 6px 0;
+    font-size: 16px;
+    line-height: 16px;
+    color: #333;
+    text-align: center;
+}
+.clearfix:after {
+    display: block;
+    height: 0;
+    clear: both;
+    line-height: 0;
+    visibility: hidden;
+    content: ".";
+}
+
+/*********** 时间轴 **********************************/
+.detail_trip {
+    position: relative;
+    width: 900px;
+}
+.plan_day {
+    margin-bottom: 20px;
+}
+.detail_trip .detaildays {
+    padding-bottom: 20px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #333;
+    border-bottom: 1px solid #ddd;
+}
+.plan_day>p {
+    margin-bottom: 24px;
+}
+.detail_trip .detaildays .icon.gliconbus, .simpleTrip .site .icon.gliconbus {
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAGXRFW…xG1stgit0lv4CYDeqdTUCFv3AUCmxIXv6JNQypBQACDADYLU4LTBSB5QAAAABJRU5ErkJggg==) no-repeat;
+}
+.detail_trip .detaildays .icon, .simpleTrip .site .icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin: 0 10px;
+    vertical-align: top;
+    background-size: 20px 20px;
+}
+.plan_day .module {
+    padding: 0 20px 50px;
+}
+.plan_day>div {
+    padding-top: 20px;
+    margin-left: 100px;
+    border-left: 1px solid #eee;
+}
+.plan_one {
+    position: relative;
+    margin-left: -100px;
+    font-size: 18px;
+}
+.plan_one span {
+    display: inline-block;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+}
+/*.plan_one i.bus {*/
+    /*background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAAAGXRFW…ni7jqP1lxFbOcDhS9TTSmqNsyFebGhXvCSAm/kukz/CDAAk4S9aRtQTDkAAAAASUVORK5CYII=);*/
+/*}*/
+/*.plan_one i {*/
+    /*left: 68px;*/
+    /*width: 22px;*/
+    /*height: 22px;*/
+    /*background-size: 22px 22px;*/
+/*}*/
+.plan_one b {
+    left: 112px;
+    display: -webkit-box;
+    max-height: 40px;
+    overflow: hidden;
+}
+.plan_one b {
+    position: absolute;
+    display: inline-block;
+    top: 0;
+}
+.traffic .timeAndway .consume, .traffic .timeAndway .direct, .traffic .timeAndway .tourDistance, .traffic .timeAndway .tourTime, .traffic .timeAndway .transfer {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin: -2px 10px 0 30px;
+    vertical-align: middle;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAAGXRFW…196yj/PqCaDnxGP4N4+QaxwZ2x+Yz+dRThPaQv4HWqXgIMAFMmVIneI03kAAAAAElFTkSuQmCC) no-repeat;
+    background-size: 14px 14px;
+}
+.traffic {
+    position: relative;
+    margin: 30px 0 0 13px;
+}
+.traffic .timeAndway {
+    font-size: 14px;
+    color: #999;
+}
+.traffic .timeAndway em:first-child {
+    margin-left: 0;
+}
+.traffic .timeAndway .tourTime {
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAAGXRFW…IpBGwGyaVA1SLSKlQAFAD9QHwbiH9D8W2omCZMEwgABBgA3aY/ghULUQ4AAAAASUVORK5CYII=) no-repeat;
+}
+.traffic .description {
+    margin-top: 13px;
+    font-size: 14px;
+    color: #666;
+}
+.traffic .imgbox {
+    height: 101px;
+    margin-top: 20px;
+    overflow: hidden;
+    font-size: 0;
+}
+.traffic .reminder {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #666;
+}
+.traffic .reminder .title {
+    margin-bottom: 6px;
+    color: #ff7449;
+}
+
+.plan_day .module {
+    padding: 0 20px 50px;
+}
+/*.plan_one i.spots {*/
+    /*background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAAAGXRFW…jrPKhX2oEROgNIR4IKFGhlKglVAspQl0FJCoiX46pMAQIMAIPvscme3BytAAAAAElFTkSuQmCC);*/
+/*}*/
+/*.plan_one i {*/
+    /*left: 68px;*/
+    /*width: 22px;*/
+    /*height: 22px;*/
+    /*background-size: 22px 22px;*/
+/*}*/
+.plan_one b {
+    position: absolute;
+    display: inline-block;
+    top: 0;
+}
+.plan_one b {
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.traffic {
+    position: relative;
+    margin: 30px 0 0 13px;
+}
+.traffic .timeAndway {
+    font-size: 14px;
+    color: #999;
+}
+.traffic .timeAndway em:first-child {
+    margin-left: 0;
+}
+.traffic .timeAndway .tourTime {
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAAGXRFW…IpBGwGyaVA1SLSKlQAFAD9QHwbiH9D8W2omCZMEwgABBgA3aY/ghULUQ4AAAAASUVORK5CYII=) no-repeat;
+}
+.traffic .timeAndway .consume, .traffic .timeAndway .direct, .traffic .timeAndway .tourDistance, .traffic .timeAndway .tourTime, .traffic .timeAndway .transfer {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin: -2px 10px 0 30px;
+    vertical-align: middle;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOCAYAAAAfSC3RAAAAGXRFW…196yj/PqCaDnxGP4N4+QaxwZ2x+Yz+dRThPaQv4HWqXgIMAFMmVIneI03kAAAAAElFTkSuQmCC) no-repeat;
+    background-size: 14px 14px;
+}
+.traffic .description {
+    margin-top: 13px;
+    font-size: 14px;
+    color: #666;
+}
+.traffic .imgbox {
+    height: 101px;
+    margin-top: 20px;
+    overflow: hidden;
+    font-size: 0;
+}
+
+.detail_tip {
+    margin: 20px 0 24px;
+}
+.detail_tip span {
+     width: 738px;
+     line-height: 25px;
+     color: #ff7449;
+ }
+.detail_tip span, .ly-tour-label {
+    display: inline-block;
+    font-size: 12px;
+}
+.detail_tip span, .guide_con, .guide_detail {
+    font-family: "microsoft yahei";
+}
+
+.trip_con {
+    /*float: left;*/
+    /*width: 900px;*/
+    /*clear: both;*/
+    margin-top: 30px;
+}
+h5 {
+    width: 878px;
+    height: 26px;
+    padding-left: 22px;
+    margin-top: 14px;
+    clear: both;
+    background-color: #f7f7f7;
+    background-position: -6px -347px;
+}
+.right_box, h5 {
+    margin-bottom: 20px;
+}
+/*********** 地图 **************************************/
+.map_box {
+    width: 900px;
+    height: 395px;
+    border: 1px solid #50b400;
+    background-color: #fff;
+    margin-bottom: 20px;
+}
+.bustour_bar li span, .map_box {
+    font-family: "microsoft yahei";
+}
+.map_box, .map_left, .map_lst li, .map_right {
+    position: relative;
+}
+.map_con {
+    width: 100%;
+    height: 100%;
+}
+.map_right {
+    width: 696px;
+    height: 390px;
+    float: left;
+    margin: 2px;
+}
+.BMap_mask {
+    background: transparent url(https://api.map.baidu.com/images/blank.gif);
+}
+.BMap_scaleCtrl {
+    height: 23px;
+    overflow: hidden;
+}
+/********* 地图 *************/
+.map_left {
+    float: left;
+    margin: 2px 0 0 2px;
+    width: 196px;
+}
+.map_box, .map_left, .map_lst li, .map_right {
+    position: relative;
+}
+.map_lst {
+     width: 100%;
+     height: 393px;
+     overflow-y: auto;
+     overflow-x: hidden;
+ }
+.map_lst ul {
+    width: 182px;
+}
+.map_lst li {
+    cursor: pointer;
+    width: 196px;
+    border-bottom: 1px dashed #e8e8e8;
+}
+.map_brief p, .map_lst li {
+    font-size: 12px;
+}
+.map_box, .map_left, .map_lst li, .map_right {
+    position: relative;
+}
+.map_detail {
+    padding-top: 10px;
+    padding-right: 8px;
+}
+.map_detail span {
+    background: url(//img1.40017.cn/cn/s/yry/2016/pc/final/newDetail.png) -5px -482px no-repeat;
+    width: 21px;
+    height: 33px;
+    line-height: 23px;
+    display: block;
+    float: left;
+    text-align: center;
+    margin: 0 8px;
+    font-size: 14px;
+    color: #fff;
+}
+.map_detail i {
+    float: left;
+    color: #50b400;
+    width: 136px;
+    padding: 0;
+}
+b, h1, h2, h3, h4, h5, h6, strong, th {
+    font-weight: 400;
+}
+.map_brief {
+    width: 130px;
+    padding-left: 38px;
+}
+.map_brief i {
+    color: #707070;
+    width: 40px;
+}
+.map_brief p:after {
+    display: block;
+    clear: both;
+}
+.map_brief dl {
+    border: none;
+}
+.map_brief dd {
+    width: 130px;
+    color: grey;
+}
+.map_brief dl:after, .map_brief:after, .map_detail:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+.main_l h6 {
+    float: left;
+    width: 940px;
+    height: 20px;
+    margin-left: -20px;
+    clear: both;
+    background: #f5f5f5;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-size: 14px;
+    line-height: 24px;
+}
+b, h1, h2, h3, h4, h5, h6, strong, th {
+    font-weight: 400;
+}
+/******* 费用说明 *********************************/
+.price_infor {
+    float: left;
+    width: 100%;
+    clear: both;
+}
+.con_tit {
+    float: left;
+    width: 100%;
+    padding: 20px 0 10px;
+    clear: both;
+    border-bottom: dashed 1px #ddd;
+}
+.con_tit .tit {
+    padding-left: 37px;
+    clear: both;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 34px;
+    color: #50b400;
+    background-position: -326px -256px;
+}
+.price_detail {
+    float: left;
+    width: 100%;
+    clear: both;
+}
+.price_detail dl {
+    float: left;
+    width: 100%;
+    clear: both;
+}
+dt {
+    display: block;
+}
+h5 {
+    width: 878px;
+    height: 26px;
+    padding-left: 22px;
+    margin-top: 14px;
+    clear: both;
+    background-color: #f7f7f7;
+    background-position: -6px -347px;
+}
+.price_detail dl dd {
+    float: left;
+    width: 100%;
+}
+.price_detail ul {
+    list-style-type: none;
+    counter-reset: sectioncounter;
+}
+.price_detail ul li:before {
+    content: counter(sectioncounter) "、";
+    counter-increment: sectioncounter;
+}
+.price_detail dl dd p {
+    font-size: 12px;
+    line-height: 22px;
+    color: #666;
+}
+dt {
+    display: block;
+}
+/******* 预定须知 **********************/
+.price_infor {
+    float: left;
+    width: 100%;
+    clear: both;
+}
+.con_tit {
+     float: left;
+     width: 100%;
+     padding: 20px 0 10px;
+     clear: both;
+     border-bottom: dashed 1px #ddd;
+ }
+#bookDetail .con_tit .tit {
+    background-position: -326px -304px;
+}
+.con_tit .tit {
+    padding-left: 37px;
+    clear: both;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 34px;
+    color: #50b400;
+    background-position: -326px -256px;
+}
+.con_tit .tit, .detail_trip ul li .img_box label .txt_box, .price_table ul li a {
+    font-family: "Microsoft YaHei";
+    float: left;
+}
+.howtobook {
+    width: 100%;
+    padding-top: 16px;
+    clear: both;
+}
+.howtobook h5 {
+    margin-top: 0;
+}
+#bookDetail .notice {
+    width: 100%;
+    height: 26px;
+    line-height: 26px;
+    background: #fff;
+}
+#bookDetail .notice span {
+    display: block;
+    float: left;
+    height: 26px;
+    font-size: 12px;
+    color: #666;
+    background: url(//img1.40017.cn/cn/s/yry/2016/pc/final/ordernew.png) no-repeat;
+    background-size: auto;
+}
+#bookDetail .notice span.select {
+    padding-left: 42px;
+    margin-right: 40px;
+    background-position: 0 -3px;
+}
+#bookDetail .notice span.write {
+    padding-left: 38px;
+    margin-right: 40px;
+    background-position: -4px -40px;
+}
+#bookDetail .notice span.pay {
+    padding-left: 45px;
+    margin-right: 40px;
+    background-position: -2px -75px;
+}
+#bookDetail .notice span.wait {
+    padding-left: 34px;
+    margin-right: 40px;
+    background-position: -6px -114px;
+}
+#bookDetail .notice span.start {
+    padding-left: 39px;
+    margin-right: 40px;
+    background-position: -4px -152px;
+}
+#bookDetail .notice span.comment {
+    padding-left: 34px;
+    margin-right: 40px;
+    background-position: -4px -191px;
+}
+/*******************预定须知******************/
+/*******************预定限制******************/
+.price_infor .book_txt {
+    float: left;
+    width: 100%;
+    clear: both;
+    font-size: 12px;
+    line-height: 22px;
+    color: #535353;
+}
+.price_infor .book_txt dl {
+    float: left;
+    width: 100%;
+    padding: 6px 0 0;
+    clear: both;
+}
+.price_infor .book_txt dl dt {
+    float: left;
+    width: 100%;
+}
+.price_infor .book_txt dl dd {
+    float: left;
+    width: 100%;
+    padding-bottom: 20px;
+}
+.price_infor .book_txt .bookTitle {
+    padding: 5px 0;
+    font-size: 16px;
+    font-weight: 700;
+}
+.price_infor .book_txt dl dd p {
+    font-size: 12px;
+    line-height: 22px;
+    color: #666;
+}
+.price_infor .book_txt .bookLimit .type {
+    font-size: 14px;
+}
+.price_infor .book_txt ul {
+    list-style-type: none;
+    counter-reset: sectioncounter;
+}
+.price_infor .book_txt ul li:before {
+    content: counter(sectioncounter) "、";
+    counter-increment: sectioncounter;
+}
+/*******************预定说明******************/
+.price_infor .book_txt .bookTitle {
+    padding: 5px 0;
+    font-size: 16px;
+    font-weight: 700;
+}
+.price_infor .book_txt .bookingAlert li, .price_infor .book_txt .changeRule li {
+    counter-reset: sectioncounter;
+}
+.price_infor .book_txt dl dd p {
+    font-size: 12px;
+    line-height: 22px;
+    color: #666;
+}
+/*************退改规则***************************/
+.price_infor .book_txt .bookingAlert li, .price_infor .book_txt .changeRule li {
+    counter-reset: sectioncounter;
+}
+/*温馨提示*/
+.price_infor .book_txt dl dd p b {
+    display: block;
+    padding: 8px 0;
+    font-size: 14px;
+    color: #333;
+}
+/********************************** 用户点评 ********************************************************/
+
+#userComment .con_tit .tit {
+    background-position: -330px -380px;
+}
+.con_tit .tit {
+    padding-left: 37px;
+    clear: both;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 34px;
+    color: #50b400;
+    background-position: -326px -256px;
+}
+.con_tit .tit, .detail_trip ul li .img_box label .txt_box, .price_table ul li a {
+    font-family: "Microsoft YaHei";
+    float: left;
+}
+.con_tit .dptk {
+    position: relative;
+    float: left;
+    height: 34px;
+    margin-left: 20px;
+    font-size: 12px;
+    line-height: 34px;
+    color: #333;
+}
+.dptk i {
+    color: #0185c6;
+    cursor: pointer;
+}
+.Comment {
+    top: 6px;
+    left: 112px;
+    z-index: 2;
+}
+.Comment, .grade_why b, .tk {
+    position: absolute;
+}
+.Comment, .grade_why, .tk {
+    font-size: 12px;
+    color: #666;
+}
+.none {
+    display: none;
+}
+.Comment div {
+    top: 27px;
+    width: 305px;
+}
+.Comment div, .zhg_tag_tit {
+     position: absolute;
+     top: 28px;
+     z-index: 2;
+     padding: 13px 11px;
+     line-height: 22px;
+     background: #fff;
+     border: 1px solid #ddd;
+     box-shadow: 0 0 6px 2px #e8e8e8;
+     font-size: 12px;
+     color: #666;
+ }
+.Comment div p {
+    line-height: 24px;
+    text-align: left;
+}
+/* 分数 */
+.userComment_content .grade_box {
+    float: left;
+    width: 100%;
+    height: 90px;
+    padding: 44px 0;
+    margin: 0 auto;
+}
+.hpl_box {
+    float: left;
+    width: 360px;
+    height: 70px;
+    padding-left: 15px;
+    border-right: 1px solid #f0f0f0;
+}
+.hpl_grade {
+    float: left;
+    width: 100px;
+    height: 90px;
+    margin-right: 32px;
+    margin-bottom: 13px;
+    color: #333;
+}
+.hpl_grade, .temporary {
+    font-size: 12px;
+    text-align: center;
+}
+.hpl_grade span {
+    display: block;
+    margin-top: 18px;
+}
+.hpl_grade span {
+    height: 38px;
+    font-size: 46px;
+    line-height: 38px;
+    color: #f60;
+}
+.hplsatisfaction i {
+    font-size: 24px;
+}
+/*评分小星星*/
+.hpl {
+    float: left;
+    width: 195px;
+    height: 90px;
+}
+.hpl span {
+    display: block;
+    height: 14px;
+    margin-bottom: 11px;
+    line-height: 14px;
+}
+.grade_grade p, .hpl span, .hpl_grade p {
+    font-size: 12px;
+    color: #333;
+}
+.hpl span u {
+    display: block;
+    float: left;
+}
+.hpl span s {
+    position: relative;
+    float: left;
+    width: 95px;
+    margin: 0 10px;
+    background-position: 0 0;
+}
+.hpl span i {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    background-position: 0 -23px;
+}
+.gradelabel span, .hpl span i, .hpl span s {
+    background: url(//file.40017.cn/dujia/img/touch/cn/holiday/tchoutput/img/bustour/pc/bustour_detail/dpimgnew.png) no-repeat;
+}
+.hpl span i, .hpl span s {
+     height: 16px;
+     display: block;
+ }
+.hpl span b {
+    display: block;
+    float: right;
+    color: #f63;
+}
+
+.gradelabel {
+    float: left;
+    width: 484px;
+    height: 90px;
+    padding-top: 4px;
+    padding-left: 40px;
+    overflow: hidden;
+}
+.none {
+    display: none;
+}
+.gradelabel span {
+    display: block;
+    float: left;
+    width: 48px;
+    margin-right: 12px;
+    font-size: 12px;
+    color: #333;
+    text-align: center;
+    background: 0 0;
+}
+.labelall {
+    float: left;
+    width: 424px;
+}
+.grade_why {
+    position: relative;
+    float: left;
+    width: 500px;
+    padding-top: 8px;
+    text-align: center;
+}
+.Comment, .grade_why, .tk {
+    font-size: 12px;
+    color: #666;
+}
+.dptk i {
+    color: #0185c6;
+    cursor: pointer;
+}
+.grade_why b {
+    bottom: 5px;
+    width: 16px;
+    height: 16px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+.dptk .btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.child_box b, .grade_why b, .returncomment b, .returntk s {
+    background: url(//img1.40017.cn/cn/s/yry/final/retuncommenticon.png) no-repeat;
+}
+/** 评价导航 ********/
+.dpmenu {
+    float: left;
+    width: 940px;
+    height: 45px;
+    margin-top: 60px;
+    margin-left: -20px;
+    line-height: 45px;
+    background-color: #f6fbf2;
+}
+.dpmenu ul {
+    float: left;
+    padding-left: 10px;
+}
+.dpmenu li {
+    float: left;
+    padding-left: 20px;
+    font-size: 14px;
+}
+.dpmenu .onlyCurrent {
+    margin-left: 30px;
+    font-size: 14px;
+    cursor: pointer;
+}
+.dpmenu .onlyCurrent input[type=checkbox] {
+    display: inline-block;
+    vertical-align: -2px;
+}
+.sortord {
+    float: right;
+    padding-right: 25px;
+}
+.sortord a.at {
+    color: #ff7800;
+}
+.sortord a {
+    margin-right: 15px;
+    font-size: 14px;
+    color: #666;
+    cursor: pointer;
+}
+/******评价详情*******/
+.dp_content {
+    float: left;
+    width: 100%;
+}
+.info_list {
+    position: relative;
+    padding: 20px 15px 30px;
+    border-bottom: 1px solid #f5f5f5;
+}
+.list_left {
+     float: left;
+     width: 80px;
+     text-align: center;
+ }
+.list_left, .list_right, .tel {
+    display: block;
+}
+.list_left .imghead {
+    max-width: 100%;
+    margin-bottom: 1px;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+}
+img {
+    border: 0;
+}
+.tel {
+    color: #666;
+    text-overflow: ellipsis;
+}
+.list_right {
+    float: left;
+    width: 728px;
+    padding-left: 44px;
+}
+.list_right p {
+    min-height: 72px;
+    font-size: 14px;
+    line-height: 24px;
+    color: #666;
+}
+.dpImg {
+    width: 100%;
+    height: 90px;
+    padding-top: 16px;
+}
+.dpImg img {
+    margin-right: 10px;
+}
+.dpImg .lookmore, .dpImg img {
+    width: 90px;
+    height: 90px;
+    float: left;
+    cursor: pointer;
+}
+img {
+    border: 0;
+}
+.useful {
+    width: 100%;
+    height: 28px;
+    margin-top: 10px;
+}
+.useful i {
+    float: left;
+    margin-top: 10px;
+    font-size: 12px;
+    color: #999;
+}
+.useful i a {
+    font-size: 12px;
+    color: #999;
+}
+.usebtn {
+    float: right;
+    height: 26px;
+    padding: 0 10px;
+    font-size: 14px;
+    line-height: 26px;
+    color: #666;
+    border: 1px solid #ddd;
+}
+.clearfix:after {
+    display: block;
+    height: 0;
+    clear: both;
+    line-height: 0;
+    visibility: hidden;
+    content: ".";
+}
+/*评价分页*/
+.s_pager {
+    padding: 15px 0;
+    overflow: hidden;
+}
+.s_pager .all, .usebtn em {
+    float: left;
+}
+.pager .page_num {
+    float: left;
+    line-height: 35px;
+}
+.pager .page_link {
+    float: right;
+    margin-top: 0;
+}
+.page_link .first_page02, .page_link .previous_page01 {
+    float: left;
+}
+.page_link .border_gray {
+    position: relative;
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    color: #666;
+    text-align: center;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+.page_link a, .page_link span {
+    padding-top: 3px;
+    padding-bottom: 1px;
+    margin-left: 5px;
+    color: #64a10a;
+}
+.page_link .previous_page01 b, .page_link .previous_page02 b {
+    left: 7px;
+    border-color: transparent #999 transparent transparent;
+    border-style: dashed solid dashed dashed;
+}
+.page_link .next_page01 b, .page_link .next_page02 b, .page_link .previous_page01 b, .page_link .previous_page02 b {
+    top: 12px;
+    z-index: 4;
+    border-width: 6px;
+}
+.page_link .next_page01 b, .page_link .next_page01 i, .page_link .next_page02 b, .page_link .next_page02 i, .page_link .previous_page01 b, .page_link .previous_page01 b i, .page_link .previous_page02 b, .page_link .previous_page02 i {
+    position: absolute;
+    display: block;
+    width: 0;
+    height: 0;
+    font-size: 0;
+    line-height: 0;
+    background: 0;
+}
+.page_link .previous_page01 b i, .page_link .previous_page02 i {
+    border-color: transparent #fff transparent transparent;
+    border-style: dashed solid dashed dashed;
+}
+.page_link .next_page01 i, .page_link .next_page02 i, .page_link .previous_page01 b i, .page_link .previous_page02 i {
+    top: -5px;
+    left: -3px;
+    z-index: 4;
+    border-width: 5px;
+}
+.page_link .on_page {
+    float: left;
+    color: #fff;
+    background: #88929a;
+}
+.page_link .border_gray {
+    position: relative;
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    color: #666;
+    text-align: center;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+.page_link .choose_page {
+    float: left;
+    background: #fff;
+}
+.page_link .border_gray {
+    position: relative;
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    color: #666;
+    text-align: center;
+    background-color: #fff;
+    border: 1px solid #ddd;
+}
+.page_link label {
+    padding: 0 7px 0 22px;
+    line-height: 38px;
+    color: #333;
+}
+label {
+    cursor: default;
+}
+.currentnum {
+    width: 53px;
+    line-height: 35px;
+    background: #fff;
+}
+.currentnum, .page_btn {
+    height: 35px;
+    margin-right: 10px;
+    border: 1px solid #eee;
+    text-align: center;
+}
+.page_btn {
+    width: 35px;
+    font: 16px/35px Arial;
+    color: #666;
+    cursor: pointer;
+    background: #fff;
+}
+
+/* 常见问题 */
+#commontProblem ol {
+    height: 282px;
+    padding-top: 15px;
+    padding-right: 55px;
+    clear: both;
+}
+#commontProblem li {
+    margin-bottom: 20px;
+}
+#commontProblem li p {
+    padding-left: 54px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #5d5d5d;
+    background-position: -319px -474px;
+}
+#commontProblem li div {
+    padding-left: 54px;
+    font-size: 12px;
+    line-height: 22px;
+    color: grey;
+    background-position: -319px -507px;
+}
+#commontProblem .nav1 {
+    width: 190px;
+    padding-bottom: 25px;
+    margin: 0 auto;
+    line-height: 0;
+}
+.nav1 a {
+    width: 50px;
+    height: 10px;
+    margin-left: 10px;
+}
+#commontProblem .nav1 .active {
+    background: #84ca4c;
+}
+.nav1 span {
+    display: inline-block;
+    width: 30px;
+    height: 3px;
+    background: #ddd;
+}
+/*#special .cont {*/
+    /*margin-top: 15px;*/
+/*}*/
+/*.happybusimg {*/
+    /*display: inline-block;*/
+    /*margin-top: 30px;*/
+/*}*/
+
+

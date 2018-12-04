@@ -1,0 +1,32 @@
+#server:
+#  port: 8080
+spring:
+   datasource:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://139.196.90.39:3306/yantutripdb?useSSL=false
+      username: yantutripdb
+      password: yantu666
+   thymeleaf:
+      prefix: classpath:/templates/
+   redis:
+     host: 139.196.90.39
+     database: 5
+     password: 123456
+     jedis:
+       pool:
+         max-active: 8
+         max-wait: -1ms
+         max-idle: 8
+         min-idle: 0
+
+logging:
+  level:
+    com.baomidou.mybatisplus.samples.quickstart: error
+#mybatis
+mybatis-plus:
+  global-config:
+    db-config:
+      id-type: auto
+      field-strategy: not_null
+      table-underline: true
+    refresh: true

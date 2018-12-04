@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>用户订单管理界面</title>
+    <link rel="SHORTCUT ICON" href="/images/title.ico"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content="Blue Water Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
+	Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design"/>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
+    <link rel="stylesheet" th:href="@{/css/bootstrap123.css}"/>
+    <link th:href="@{/css/style1.css}" rel='stylesheet' type='text/css'/>
+    <link th:href="@{/css/zui.min.css}" rel='stylesheet' type='text/css'/>
+    <script th:src="@{/js/jquery-1.11.0.min.js}"></script>
+    <script th:src="@{/js/zui.min.js}"></script>
+    <link href='https://fonts.googleapis.com/css?family=Exo:100,200,300,400,500,600,700,800,900,100italic,200italic,300italic,400italic,500italic,600italic,700italic,800italic,900italic'
+          rel='stylesheet' type='text/css'/>
+    <!---- start-smoth-scrolling---->
+    <script type="text/javascript" th:src="@{/js/move-top.js}"></script>
+    <link rel="stylesheet" href="/css/searchBox.css">
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+                $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
+            });
+        });
+        window.onload = function () {
+            var data = localStorage.getItem('loginMessage');
+            console.log(data);
+            if (data != null) {
+                var objData = JSON.parse(data);
+                if (new Date().getTime() - objData.time > 1000 * 60 * 30) {
+                    localStorage.removeItem('loginMessage');
+                    document.getElementById("loginA").click();
+                    document.getElementById("loginErrorMessage").innerText = "请先完成登录";
+                } else {
+                    document.getElementById("showPortrait").style.backgroundImage= "url("+JSON.parse(objData.data).data.visitorPortrait+")";
+                    document.getElementById("loginA").style.display = "none";
+                    document.getElementById("logoutA").style.display = "block";
+                    document.getElementById("switchMemberA").style.display = "block";
+                    document.getElementById("modifyPasswordA").style.display = "block";
+                    document.getElementById("modifyInformationA").style.display = "block";
+                    document.getElementById("orderManageA").style.display = "block";
+                    // alert("订单分页");
+                    var visitorId = JSON.parse(objData.data).data.visitorId;
+                    // alert("imgpath = " + JSON.parse(objData.data).data.visitorPortrait);
+                    // document.getElementById("userImg").src = "/images/staff-1.jpg";
+                    document.getElementById("myVisitorId").value = visitorId;
+                    listVisitorOrder(visitorId,1);
+                }
+            } else {
+                document.getElementById("loginA").click();
+                document.getElementById("loginErrorMessage").innerText = "请先完成登录";
+
+            }
+
+        }
+
+        function listVisitorOrder(visitorId,pagecode) {
+            if (window.XMLHttpRequest) {
+                xhr = new XMLHttpRequest();
+            } else {
+                xhr = new ActiveXObject('Microsoft.XMLHTTP');
+            }
+            //分页
+            var url_page = "/order/page/"+visitorId+"/"+pagecode;
+            xhr.open("GET", url_page, true);
+            xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var serviceResult = JSON.parse(xhr.responseText);
+                    console.log(serviceResult);
+                    var orderDataArr = serviceResult.data.records;
+                    var iPage = serviceResult.data;
+
+                    var orderInfoTbody = document.getElementById("orderInfoTbody");
+                    orderInfoTbody.innerHTML = "";
+                    //封装订单数据信息
+                    if (orderDataArr !== null) {
+                        for(var i=0;i<orderDataArr.length;i++){
+                            var orderTime = orderDataArr[i].orderCreatetime.replace("T"," ");
+                            var myorderStatus = "";
+                            var operation = "";
+                            if(orderDataArr[i].orderStatus === 0){
+                                myorderStatus = "待付款"
+                                operation = '<td><i id=\"icon'+orderDataArr[i].orderId+'\" class="icon icon-zhifubao" onclick="orderOk(this)">支付</i>&nbsp/&nbsp<i\n' +
+                                    'class="icon icon-remove-sign" onclick="cancelOrder(this)">取消</i></td>';
+                            }else if(orderDataArr[i].orderStatus === 1){
+                                myorderStatus = "已完成";
+                                operation = '<td><i id=\"score'+orderDataArr[i].orderId+'\" class="icon icon-thumbs-up" onclick="orderScore(this)">点击评分</i></td>';
+                                //<td><i class="icon icon-thumbs-up">点击评分</i></td>
+                            }else if(orderDataArr[i].orderStatus === 2){
+                                myorderStatus = "已取消";
+                                operation = '<td><i class="icon icon-history">已取消</i></td>';
+                            }else if(orderDataArr[i].orderStatus === 3) {
+                                myorderStatus = "已评价";
+                                operation = '<td><i id=\"score'+orderDataArr[i].orderId+'\" class="icon icon-thumbs-up" onclick="orderScore(this)">查看评分</i></td>';
+                            }else{
+                                myorderStatus = "异常";
+                            }
+
+                            var orderInfo = '<tr>\n' +
+                                '                                            <td>'+orderDataArr[i].orderId +'</td>\n' +
+                                '                                            <td>'+orderDataArr[i].orderDays +'</td>\n' +
+                                '                                            <td>'+orderDataArr[i].orderNum+'</td>\n' +
+                                '                                            <td>'+orderTime +'</td>\n' +
+                                '                                            <td>'+orderDataArr[i].orderInsurance+'</td>\n' +
+                                '                                            <td>'+orderDataArr[i].orderPrice +'</td>\n' +
+                                '                                            <td>'+myorderStatus+'</td>\n' +
+                                '                                            <td><a onclick="orderDetail(this)">详细信息</a></td>\n' +
+                                operation + '\n' +
+                                '                                        </tr>';
+
+                            orderInfoTbody.innerHTML += orderInfo;
+                        }
+                    }
+                    //封装分页信息
+                    document.getElementById("cp-count").innerText = iPage.total;
+                    document.getElementById("curr-page").innerText = iPage.current;
+                    document.getElementById("total-page").innerText = iPage.pages;
+                    var lastPage = document.getElementById("next").nextElementSibling;
+                    lastPage.id = iPage.pages;
+                }
+            };
+            xhr.send();
+        }
+    </script>
+    <!--start-smoth-scrolling-->
+</head>
+<body>
+<!--start-banner-->
+<div id="header" xmlns="http://www.w3.org/1999/html">
+    <div class="mfw-header">
+        <div class="header-wrap clearfix">
+            <div class="head-logo">
+                <a class="mfw-logo" title="" href="">
+                    <img src="/images/logo-yantu.png" height="65px" width="65px">
+                </a>
+            </div>
+            <ul class="head-nav" data-cs-t="headnav" id="_j_head_nav">
+                <li class="head-nav-index" data-cs-p="index">
+                    <a href="/index" title="首页">首页</a>
+                </li>
+                <li class="head-nav-place" data-cs-p="mdd">
+                    <a href="/queryPlanList" title="周边跟团游">周边跟团游</a>
+                </li>
+                <li class="head-nav-gonglve" data-cs-p="gonglve">
+                    <a href="/queryScenicList" title="热门景点">热门景点</a>
+                </li>
+                <li class="head-nav-gonglve" data-cs-p="gonglve">
+                    <a href="/privateCustom" title="私人订制">私人订制</a>
+                </li>
+            </ul>
+            <div id="pagelet-block-fdfe14e523864f5d21c81cb8e263dfc7" class="pagelet-block" data-api="apps:user:pagelet:pageViewHeadInfo" data-params="{&quot;type&quot;:1}" data-async="1" data-controller="/js/pageletcommon/pageHeadUserInfoWWWNormal">
+
+            </div>
+        </div>
+        <div class="shadow"></div>
+    </div>
+
+    <!----start-top-nav-script---->
+    <script type="text/javascript" src="/js/responsive-nav.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $(".scroll").click(function(event){
+                event.preventDefault();
+                $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+            });
+        });
+    </script>
+
+</div>
+<!--end-banner-->
+
+<!--订单管理页面-->
+
+<div class="services">
+    <div class="container">
+        <div class="services-main">
+            <h3>用户订单管理</h3>
+            <div class="booking-top">
+                <!--<div class="col-md-4 service-left" style="display: block;margin-left:calc(50% - 100px);">-->
+                    <!--<a href="#"><img id="userImg" src="/images/s-2.jpg" alt="用户中心" style="border-radius: 50%"-->
+                                     <!--width="200px"-->
+                                     <!--height="200px"></a>-->
+                    <input type="hidden" id="myVisitorId">
+                <!--</div>-->
+                <!--<div style="margin-top: 20px;text-align: center;float: left;font-size: 18px;">-->
+                <!--<span id="tip">欢迎您:&nbsp&nbsp<span id="userTip"></span>&nbsp&nbsp以下是您的订单信息</span>-->
+                <!--</div>-->
+                <div class="col-md-10 " style="display: block; margin:0 100px;">
+                    <div class="booking-form">
+                        <div class="b_room">
+                            <div class="booking_room">
+                                <div class="reservation">
+                                    <table class="table table-striped table-bordered table-hover">
+                                        <tr class="success">
+                                            <th>订单编号</th>
+                                            <th>出游天数</th>
+                                            <th>出游人数</th>
+                                            <th>创建时间</th>
+                                            <th>保险信息</th>
+                                            <th>订单总价</th>
+                                            <th>订单状态</th>
+                                            <th>查看详细</th>
+                                            <th>操作</th>
+                                        </tr>
+                                        <tbody id="orderInfoTbody">
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                <!--分页控件，将此代码添加到网页上即可-->
+                <div class="col-md-10 " style="display: block; margin:0 100px;">
+                    <span id="tip" style="float: left;font-size: 13px">沿途旅行欢迎您</span>
+                    <div class="c-pages" style="float: right">
+                        <div class="cp-item">
+                            <span>共</span>
+                            <span id="cp-count">0</span>
+                            <span>条</span>
+                            <span>&nbsp当前是：</span>
+                            <span id="curr-page"></span>
+                            <span>/</span>
+                            <span id="total-page">1</span>
+                            &nbsp
+                            <button id="1" onclick="window.location.href='/orderManager'">首页</button>
+                            <button id="prev" onclick="prev()">上页</button>
+                            <button id="next" onclick="next()">下页</button>
+                            <button name="last-page" onclick="goLastPage(this)">尾页</button>
+
+                            <input type="number" id="goToPage"/>
+                            <span>页</span>
+                            <button id="goTo" onclick="goto()">转到</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!---pop-up-box---->
+<script type="text/javascript" src="/js/modernizr.custom.min.js"></script>
+<link href="/css/popup-box.css" rel="stylesheet" type="text/css" media="all"/>
+<script src="/js/jquery.magnific-popup.js" type="text/javascript"></script>
+<!---//pop-up-box---->
+<div id="small-dialog" class="mfp-hide" style="z-index: 1000">
+    <div class="login">
+        <h3>登录</h3>
+        <h4 id="loginErrorMessage"></h4>
+        <a class="play-icon popup-with-zoom-anim" href="#small-dialog1" style="float: right;padding-right:50px;">验证码登录</a>
+        <input type="text" value="Cellphone" id="loginCellphone" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Cellphone';}" />
+        <input type="password" value="Password" id="loginPassword" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}"/>
+        <input type="submit" value="登录" onclick="login()" />
+    </div>
+    <a  href="forgetPassword" style="padding-right: 200px">忘记密码</a>
+    <a class="play-icon popup-with-zoom-anim" href="#small-dialog2" style="float: right;padding-right: 50px">没有账号?去注册</a>
+</div>
+<div id="small-dialog1" class="mfp-hide" style="z-index: 1000">
+    <div class="login">
+        <h3>登录</h3>
+        <h4 id="loginCodeErrorMessage"></h4>
+        <a class="play-icon popup-with-zoom-anim" href="#small-dialog" style="float: right;padding-right:50px;">账号密码登录</a>
+        <input type="text" value="Cellphone" id="loginCellphoneByCode" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Cellphone';}" />
+        <input type="text" value="验证码" id="loginCode" class="code" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '验证码';}"/>
+        <input type="submit" value="   获取验证码   " onclick="code(this)" id="getCode" />
+        <input type="submit" value="登录" onclick="loginByCode(this)" />
+    </div>
+    <a class="play-icon popup-with-zoom-anim" href="#small-dialog2" style="float: right;padding-right: 50px">没有账号?去注册</a>
+</div>
+<div id="small-dialog2" class="mfp-hide" style="z-index: 1000">
+    <div class="signup">
+        <h3>注册</h3>
+        <h4 id="signUpErrorMessage"></h4>
+        <a class="play-icon popup-with-zoom-anim" href="#small-dialog" style="float: right;padding-right:50px;">已有账号?去登录</a>
+        <input type="text" id="signUpCellphone" class="cellphone"value="cellphone" onfocus="this.value = '';" onblur="if (this.value === '') {this.value = 'cellphone';}"  />
+        <input type="password" id="signUpPassword" value="Password" onfocus="this.value = '';" onblur="if (this.value === '') {this.value = 'Password';}"/>
+        <input type="password" id="signUpEnterPassword" value="Password" onfocus="this.value = '';" onblur="if (this.value === '') {this.value = 'signUpPassword';}if (this.value !== document.getElementById('signUpPassword').value) {document.getElementById('signUpErrorMessage').innerText='两次密码不一致哦';} "/>
+        <input type="submit"  value="注册" onclick="signUp()"/>
+    </div>
+</div>
+<script>
+    $(document).ready(function() {
+        $('.popup-with-zoom-anim').magnificPopup({
+            type: 'inline',
+            fixedContentPos: false,
+            fixedBgPos: true,
+            overflowY: 'auto',
+            closeBtnInside: true,
+            preloader: false,
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-zoom-in'
+        });
+    });
+    var xhr = null;
+    function login() {
+        if (window.XMLHttpRequest) {
+            xhr = new XMLHttpRequest();
+        } else {
+            xhr = new ActiveXObject('Microsoft.XMLHTTP');
+        }
+        var url_login = "/yantu/login/login";
+        var cellphone = document.getElementById("loginCellphone").value;
+        var password =  document.getElementById("loginPassword").value;
+        var objData = {
+            cellphone : cellphone,
+            password : password
+        };
+        var jsonData = JSON.stringify(objData);
+        console.log(objData)
+        xhr.open("POST", url_login, true);
+        xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+        xhr.onreadystatechange =  function () {
+            if(xhr.readyState===4 && xhr.status ===200 ){
+                var result= JSON.parse(xhr.responseText);
+                localStorage.setItem('loginMessage',JSON.stringify({data:xhr.responseText,time:new Date().getTime()}));
+                console.log(localStorage.getItem('loginMessage'));
+                if(result.status ===1){
+                    var arrayClose = document.getElementsByClassName("mfp-close");
+                    for(var i=0;i<arrayClose.length;i++){
+                        arrayClose[i].click();
+                    }
+                    document.getElementById("showPortrait").style.backgroundImage= "url("+result.data.visitorPortrait+")";
+                    document.getElementById("loginA").style.display = "none";
+                    document.getElementById("logoutA").style.display = "block";
+                    document.getElementById("switchMemberA").style.display ="block";
+                    document.getElementById("modifyPasswordA").style.display ="block";
+                    document.getElementById("modifyInformationA").style.display ="block";
+                    document.getElementById("orderManageA").style.display ="block";
+                }else{
+                    document.getElementById("loginErrorMessage").innerText=result.msg;
+                    document.getElementById("loginErrorMessage").style.color="red";
+                    localStorage.removeItem('loginMessage');
+                }
+            }
+        };
+        xhr.send(jsonData);
+    }
+    var wait = 60;
+    function code(obj) {
+        if (window.XMLHttpRequest) {
+            xhr = new XMLHttpRequest();
+        } else {
+            xhr = new ActiveXObject('Microsoft.XMLHTTP');
+        }
+        var url_code = "/yantu/login/code";
+        var cell =  document.getElementById("loginCellphoneByCode").value;
+        var objCode = {
+            cellPhone : document.getElementById("loginCellphoneByCode").value
+        };
+
+        console.log(cell);
+        console.log(objCode);
+        var jsonCode = JSON.stringify(objCode);
+        xhr.open("POST", url_code, true);
+        xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+        xhr.onreadystatechange =  function () {
+            if(xhr.readyState===4 && xhr.status ===200 ){
+                var result = xhr.responseText;
+                if(result !== null){
+                    localStorage.setItem("loginCode",result);
+                }else{
+                    document.getElementById("loginCodeErrorMessage").innerText="验证码未知错误";
+                    document.getElementById("loginCodeErrorMessage").style.color="red";
+
+                }
+            }
+        };
+        xhr.send(jsonCode);
+        time(obj);
+    }
+    function time(obj) {
+        if (wait === 0) {
+            obj.removeAttribute("disabled");
+            obj.value="   获取验证码   ";
+            wait = 60;
+        } else {
+            obj.setAttribute("disabled", true);
+            obj.value=wait+"秒后重新发送";
+            wait--;
+            console.log(wait)
+            t=setTimeout(function() {
+                time(obj)
+            }, 1000)
+        }
+    }
+    function loginByCode(obj) {
+        wait = 60;
+        clearTimeout(t);
+        document.getElementById("getCode").removeAttribute("disabled");
+        document.getElementById("getCode").value = "   获取验证码   ";
+        console.log(localStorage.getItem("loginCode"));
+        if(document.getElementById("loginCode").value === localStorage.getItem("loginCode")){
+            if (window.XMLHttpRequest) {
+                xhr = new XMLHttpRequest();
+            } else {
+                xhr = new ActiveXObject('Microsoft.XMLHTTP');
+            }
+            var url_login = "/yantu/login/login";
+            var cellphone = document.getElementById("loginCellphoneByCode").value;
+            var verificationCode =  document.getElementById("loginCode").value;
+            var objData = {
+                cellphone : cellphone,
+                verificationCode : verificationCode
+            };
+            console.log(objData);
+            var jsonData = JSON.stringify(objData);
+            xhr.open("POST", url_login, true);
+            xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+            xhr.onreadystatechange =  function () {
+                if(xhr.readyState===4 && xhr.status ===200 ){
+                    var result= JSON.parse(xhr.responseText);
+                    console.log(result);
+                    localStorage.setItem('loginMessage',JSON.stringify({data:xhr.responseText,time:new Date().getTime()}));
+                    if(result.status ===1){
+                        var arrayClose = document.getElementsByClassName("mfp-close");
+                        for(var i=0;i<arrayClose.length;i++){
+                            arrayClose[i].click();
+                        }
+                        document.getElementById("showPortrait").style.backgroundImage= "url("+result.data.visitorPortrait+")";
+                        document.getElementById("loginA").style.display = "none";
+                        document.getElementById("logoutA").style.display = "block";
+                        document.getElementById("switchMemberA").style.display ="block";
+                        document.getElementById("modifyPasswordA").style.display ="block";
+                        document.getElementById("modifyInformationA").style.display ="block";
+                        document.getElementById("orderManageA").style.display ="block";
+                    }else{
+                        document.getElementById("loginCodeErrorMessage").innerText=result.msg;
+                        document.getElementById("loginCodeErrorMessage").style.color="red";
+                        localStorage.removeItem('loginMessage');
+                    }
+                }
+            };
+            xhr.send(jsonData);
+        }else {
+            document.getElementById("loginCodeErrorMessage").innerText="验证码输入错误";
+            document.getElementById("loginCodeErrorMessage").style.color="red";
+        }
+
+    }
+    function signUp() {
+        if (window.XMLHttpRequest) {
+            xhr = new XMLHttpRequest();
+        } else {
+            xhr = new ActiveXObject('Microsoft.XMLHTTP');
+        }
+        var url_register = "/yantu/visitor/register";
+        var cellphone = document.getElementById("signUpCellphone").value;
+        var password =  document.getElementById("signUpPassword").value;
+        var objData = {
+            cellphone : cellphone,
+            password : password
+        };
+        var jsonData = JSON.stringify(objData);
+        xhr.open("POST", url_register, true);
+        xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+        xhr.onreadystatechange =  function () {
+            if(xhr.readyState===4 && xhr.status ===200 ){
+                var result= JSON.parse(xhr.responseText);
+                console.log(result);
+                if(result.status ===1){
+                    localStorage.removeItem('signUpMessage');
+                    localStorage.setItem('signUpMessage',JSON.stringify({data:xhr.responseText,time:new Date().getTime()}));
+                    window.location.href = "perfectInformation";
+                }else{
+                    document.getElementById("signUpErrorMessage").innerText=result.msg;
+                    document.getElementById("signUpErrorMessage").style.color="red";
+                    localStorage.removeItem('signUpMessage');
+                }
+            }
+        };
+        xhr.send(jsonData);
+    }
+</script>
+<!--End-pop-up-box-->
+<!--start-footer-->
+<div class="footer">
+    <div class="container">
+        <div class="footer-main">
+            <div class="col-md-5 footer-left">
+                <p>联系我们</p>
+                <ul>
+                    <li><a href="#"><span class="twt"> </span></a></li>
+                    <li><a href="#"><span class="fb"> </span></a></li>
+                    <li><a href="#"><span class="p"> </span></a></li>
+                    <li><a href="#"><span class="yt"> </span></a></li>
+                    <li><a href="#"><span class="in"> </span></a></li>
+                </ul>
+                <p>地址 苏州市创新科技园</p>
+                <p>官方邮箱 <a href="crazylemon@gmail.com"> crazylemon@gmail.com</a></p>
+                <p>官方电话  +86 17678627809</p>
+            </div>
+            <div class="col-md-7 footer-right">
+                <h4>给我们的建议</h4>
+                <span>
+						<input type="text"  value="请在这里留下您的宝贵建议" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '请在这里留下您的宝贵建议';}">
+						<input type="submit" value="提交">
+					</span>
+                <ul>
+                    <li><a href="/index">首页</a></li>
+                    <li><a href="/queryPlanList">周边跟团游</a></li>
+                    <li><a href="/queryScenicList">热门景点</a></li>
+                    <li><a href="/privateCustom">私人订制</a></li>
+                    <li><a class="play-icon popup-with-zoom-anim" href="#small-dialog">登录</a></li>
+                    <li><a class="play-icon popup-with-zoom-anim" href="#small-dialog2">注册</a></li>
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        <div class="footer-text">
+            <p>Copyright &copy; 2018-crazylemon项目组-沿途旅行</p>
+        </div>
+    </div>
+    <a href="#header" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover"
+                                                                               style="opacity: 1;"> </span></a>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <div class="btn-group" style="z-index: 1000" >
+        <a id="showPortrait" href="javascript:showFrame()" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  onblur="document.getElementById('showFrameDiv').style.display='none'" style="display: block;"> <span id="toTopl" style="opacity: 1;"> </span></a>
+        <div class="dropdown-menu" id="showFrameDiv" style="display: none;position: absolute;">
+            <a class="dropdown-item" href="javascript:window.location.href='/modifyInformation'" id="modifyInformationA" style="display: none;width: 100%;padding: .25rem 1.5rem;clear: both;font-weight: 400;color: #212529;text-align: center;white-space: nowrap;background-color: transparent;border: 0;">修改资料</a>
+            <a class="dropdown-item" href="javascript:window.location.href='/modifyPassword'" id="modifyPasswordA" style="display: none;width: 100%;padding: .25rem 1.5rem;clear: both;font-weight: 400;color: #212529;text-align: center;white-space: nowrap;background-color: transparent;border: 0;">修改密码</a>
+            <a class="dropdown-item" href="javascript:window.location.href='/orderManager'" id="orderManageA" style="display: none;width: 100%;padding: .25rem 1.5rem;clear: both;font-weight: 400;color: #212529;text-align: center;white-space: nowrap;background-color: transparent;border: 0;">订单管理</a>
+            <a class="dropdown-item" href="javascript:switchMember()" id="switchMemberA" style="display: none;width: 100%;padding: .25rem 1.5rem;clear: both;font-weight: 400;color: #212529;text-align: center;white-space: nowrap;background-color: transparent;border: 0;">切换账号</a>
+            <a class="dropdown-item" href="javascript:logout()" id="logoutA" style="display: none;width: 100%;padding: .25rem 1.5rem;clear: both;font-weight: 400;color: #212529;text-align: center;white-space: nowrap;background-color: transparent;border: 0;">退出</a>
+            <a class="play-icon popup-with-zoom-anim" href="#small-dialog" id="loginA" style="display: block;width: 100%;padding: .25rem 1.5rem;clear: both;font-weight: 400;color: #212529;text-align: center;white-space: nowrap;background-color: transparent;border: 0;"><span>登录 </span></a>
+        </div>
+    </div>
+    <script>
+        function showFrame() {
+            document.getElementById("showFrameDiv").style.display = "";
+        }
+        function logout() {
+            if (window.XMLHttpRequest) {
+                xhr = new XMLHttpRequest();
+            } else {
+                xhr = new ActiveXObject('Microsoft.XMLHTTP');
+            }
+            var url_logout = "/yantu/login/logout";
+            xhr.open("GET", url_logout, true);
+            xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+            xhr.onreadystatechange =  function () {
+                if(xhr.readyState===4 && xhr.status ===200 ){
+                    console.log(xhr.responseText)
+                    if(xhr.responseText !==null){
+                        localStorage.removeItem('loginMessage');
+                        window.location.href = "index";
+                    }
+                }
+            };
+            xhr.send();
+        }
+        function switchMember() {
+            if (window.XMLHttpRequest) {
+                xhr = new XMLHttpRequest();
+            } else {
+                xhr = new ActiveXObject('Microsoft.XMLHTTP');
+            }
+            var url_logout = "/yantu/login/logout";
+            xhr.open("GET", url_logout, true);
+            xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+            xhr.onreadystatechange =  function () {
+                if(xhr.readyState===4 && xhr.status ===200 ){
+                    console.log(xhr.responseText)
+                    if(xhr.responseText !==null){
+                        localStorage.removeItem('loginMessage');
+                        document.getElementById("loginA").click();
+                    }
+                }
+            };
+            xhr.send();
+        }
+    </script>
+</div>
+<!--end-footer-->
+<div style="display:none">
+    <script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script>
+</div>
+
+<script>
+
+
+    function orderDetail(thisOrder) {
+        //得到当前订单的Id;
+        var orderId = thisOrder.parentElement.parentElement.children[0].innerHTML;
+        window.location.href = "/orderDetailManager?orderId=" + orderId;
+    }
+
+    //
+    <!--跳转尾页 -->
+    function goLastPage(lastpage) {
+        var myVisitorId = document.getElementById("myVisitorId").value;
+        var page = lastpage.id;
+        listVisitorOrder(myVisitorId,page);
+    }
+
+    //上一页
+    function prev() {
+        var curr_page = parseInt(document.getElementById("curr-page").innerText);
+        var myVisitorId = document.getElementById("myVisitorId").value;
+        var pre_page = curr_page - 1;
+        if (curr_page - 1 <= 0) {
+            listVisitorOrder(myVisitorId,1);
+        } else {
+            listVisitorOrder(myVisitorId,pre_page);
+        }
+    }
+
+    //下一页
+    function next() {
+        var curr_page = parseInt(document.getElementById("curr-page").innerText);
+        var myVisitorId = document.getElementById("myVisitorId").value;
+        var total_page = parseInt(document.getElementById("total-page").innerText);
+        var next_page = curr_page + 1;
+        console.log("next_page="+next_page);
+        if (next_page <= total_page) {
+            listVisitorOrder(myVisitorId,next_page);
+        }else {
+            listVisitorOrder(myVisitorId,total_page);
+        }
+    }
+
+    //转到
+    function goto() {
+        var myVisitorId = document.getElementById("myVisitorId").value;
+        var gotoPage = document.getElementById("goToPage").value;
+        var total_page = document.getElementById("total-page").innerText;
+
+        if (gotoPage <= total_page && gotoPage >= 1) {
+            listVisitorOrder(myVisitorId,gotoPage);
+
+        } else {
+            console.log("跳转失败,页数溢出");
+        }
+
+    }
+    function orderScore(obj) {
+         // var idArr = obj.id.split("score");
+         // console.log(idArr[1]);
+         localStorage.setItem("scoreId",JSON.stringify(obj.id));
+
+         if(obj.innerText === "点击评分"){
+             window.location.href = "/score";
+         }else {
+             window.location.href = "/getScoreGrade";
+         }
+
+    }
+
+    function orderOk(current_orderMaster) {
+        //得到当前订单的Id;
+        var orderId = current_orderMaster.parentElement.parentElement.children[0].innerHTML;
+        // alert(orderId);
+        window.location.href = "/alipay/pay/"+orderId;
+    }
+
+    function cancelOrder(current_orderMaster) {
+        //得到当前订单的Id;
+        var orderId = current_orderMaster.parentElement.parentElement.children[0].innerHTML;
+        // alert(orderId);
+
+        if (window.XMLHttpRequest) {
+            xhr = new XMLHttpRequest();
+        } else {
+            xhr = new ActiveXObject('Microsoft.XMLHTTP');
+        }
+
+        var url_cancelOrder = "/order/cancel";
+
+        var formData = "orderId=" + orderId;
+
+        // alert(formData);
+
+        xhr.open("PUT", url_cancelOrder);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=utf-8");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var serviceResult = JSON.parse(xhr.responseText);
+                // alert(serviceResult.data);
+                var tip = document.getElementById("tip");
+                if (serviceResult.status === 200) {
+                    current_orderMaster.parentElement.parentElement.children[6].innerHTML = "已取消";
+                    current_orderMaster.parentElement.parentElement.children[8].innerHTML = '<td><i class="icon icon-history">已取消</i></td>';
+                    //重新绑定onclic事件.
+                    current_orderMaster.onclick = function () {
+                    };
+                    tip.innerText = "您已成功取消订单";
+                    tip.style.color = "red";
+                } else {
+                    tip.innerText = "Sorry!修改订单状态失败,已完成订单无法取消!";
+                    tip.style.color = "red";
+                }
+            }
+        };
+        xhr.send(formData);
+    }
+
+</script>
+</body>
+</html>

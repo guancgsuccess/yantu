@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="SHORTCUT ICON" href="/images/title.ico"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Blue Water Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <link href="/css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <link href="/css/style.css" rel='stylesheet' type='text/css' />
+    <script src="/js/jquery-1.11.0.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Exo:100,200,300,400,500,600,700,800,900,100italic,200italic,300italic,400italic,500italic,600italic,700italic,800italic,900italic' rel='stylesheet' type='text/css'>
+    <!---- start-smoth-scrolling---->
+    <script type="text/javascript" src="/js/move-top.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $(".scroll").click(function(event){
+                event.preventDefault();
+                $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+            });
+        });
+        window.onload = function () {
+            var objli = document.getElementById("showPictureUl").getElementsByTagName("li");
+            autoPlay(objli);
+            var data = localStorage.getItem('loginMessage');
+            console.log(data);
+            if(data!=null){
+                var objData = JSON.parse(data);
+                if(new Date().getTime() - objData.time > 1000*60*30){
+                    localStorage.removeItem('loginMessage');
+                }else {
+                    // console.log(JSON.parse(objData.data).data.visitorPortrait);
+                    document.getElementById("showPortrait").style.backgroundImage= "url("+JSON.parse(objData.data).data.visitorPortrait+")";
+                    document.getElementById("loginA").style.display = "none";
+                    document.getElementById("logoutA").style.display = "block";
+                    document.getElementById("switchMemberA").style.display ="block";
+                    document.getElementById("modifyPasswordA").style.display ="block";
+                    document.getElementById("modifyInformationA").style.display ="block";
+                    document.getElementById("orderManageA").style.display ="block";
+                }
+            }
+        }
+    </script>
+    <!--start-smoth-scrolling-->
+    <title>首页</title>
+    <link rel="stylesheet" href="/css/searchBox.css">
+    <script src="/js/searchBox.js"></script>
+    <style type="text/css">
+        .team-top a{
+            color: #4588d5!important;
+            font-size: 15px!important;
+        }
+        .team-top a:hover{
+            color: #b3825a!important;
+        }
+        .team-top img{
+            width: 350px!important;
+            height: 233px!important;
+        }
+        .team-top .menu{
+            text-align: right!important;
+
+        }
+        .t-top p{
+            height: 100px!important;
+        }
+        #keyword {
+            width: 504px;
+            height: 44px;
+            /*border: 0 none;*/
+            border-color: #00c07b;
+            padding: 0 21px;
+            margin: 0 auto;
+            line-height: 46px;
+            font-size: 16px;
+            color: #666;
+            border-radius: 4px;
+        }
+        .search_button{
+            display: block;
+            width: 80px;
+            height: 48px;
+            line-height: 48px  ;
+            float: right;
+            background-color: #00c07b;
+            color: white;
+            font-size: 16px;
+            border: 0 none;
+            /*border-color: #00c07b;*/
+            border-radius: 4px;
+            text-align: center;
+        }
+        #popDiv{
+            width: 530px;
+            position: absolute;
+        }
+        #content_table{
+            width: 504px;
+        }
+        tr{
+            display:block;
+            margin:10px 0;
+        }
+        td{
+            padding-left: 20px;
+            font-size: 18px;
+        }
+        .mouseOver{
+            background: ghostwhite;
+        }
+        .mouseOut{
+            background: #FFFAFA;
+            color: #1B242F;
+        }
+    </style>
+</head>
+<body>
+<div id="header" xmlns="http://www.w3.org/1999/html">
+    <div class="mfw-header">
+        <div class="header-wrap clearfix">
+            <div class="head-logo"><a class="mfw-logo" title="" href="">
+                <img src="/images/logo-yantu.png" height="65px" width="65px">
+            </a></div>
+            <ul class="head-nav" data-cs-t="headnav" id="_j_head_nav">
+                <li class="head-nav-index" data-cs-p="index">
+                    <a href="/index" title="首页">首页</a>
+                </li>
+                <li class="head-nav-place" data-cs-p="mdd">
+                    <a href="/queryPlanList" title="周边跟团游">周边跟团游</a>
+                </li>
+                <li class="head-nav-gonglve" data-cs-p="gonglve">
+                    <a href="/queryScenicList" title="热门景点">热门景点</a>
+                </li>
+                <li class="head-nav-gonglve" data-cs-p="gonglve">
+                    <a href="/privateCustom" title="私人订制">私人订制</a>
+                </li>
+            </ul>
+            <div id="pagelet-block-fdfe14e523864f5d21c81cb8e263dfc7" class="pagelet-block" data-api="apps:user:pagelet:pageViewHeadInfo" data-params="{&quot;type&quot;:1}" data-async="1" data-controller="/js/pageletcommon/pageHeadUserInfoWWWNormal">
+
+            </div>
+        </div>
+        <div class="shadow"></div>
+    </div>
+
+    <!----start-top-nav-script---->
+    <script type="text/javascript" src="/js/responsive-nav.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $(".scroll").click(function(event){
+                event.preventDefault();
+                $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+            });
+        });
+    </script>
+
+</div>
+<div class="mfw-focus" id="_j_mfw_focus">
+    <div class="show-slider" id="_j_top_pic_container" style="height: 550px;">
+        <ul class="show-image">
+            <li style="display: list-item;">
+                <img id="main-image" src="https://n4-q.mafengwo.net/s12/M00/54/72/wKgED1vS-TuANRU_AAb_IYlP8Kk78.jpeg?imageMogr2%2Finterlace%2F1">
+                <a href="#"  class="show-title dark">
+                    <div class="dateTime">
+                        <span class="day">15</span>/Nov.2018
+                    </div>
+                    <h3>终是庄周梦了蝶，你是恩赐也是劫。</h3>
+                </a>
+            </li>
+        </ul>
+        <ul class="show-nav" id="showPictureUl">
+            <li class="active" id="show-nav-1" onclick="changeImage(this)"><img src="/images/main-right-1.jpeg" height="60" width="110"><span></span></li>
+            <li class="" id="show-nav-2" onclick="changeImage(this)"><img src="/images/main-right-2.jpeg" height="60" width="110"><span></span></li>
+            <li class="" id="show-nav-3" onclick="changeImage(this)"><img src="/images/main-right-3.jpeg" height="60" width="110"><span></span></li>
+            <li class="" id="show-nav-4" onclick="changeImage(this)"><img src="/images/main-right-4.jpeg" height="60" width="110"><span></span></li>
+            <li class="" id="show-nav-5" onclick="changeImage(this)"><img src="/images/main-right-5.jpeg" height="60" width="110"><span></span></li>
+        </ul>
+    </div>
+    <div class="search-container" id="_j_index_search">
+        <div class="search-group">
+            <div class="search_input">
+                <input type="text" size="50" id="keyword" name="keyword" placeholder="请输入目的地/景点等" oninput="getMoreContents()" onblur="keywordBlur()" onfocus="getMoreContents()">
+                <input type="button" value="搜索" class="search_button" onclick="searchButton()">
+            </div>
+            <!-- 内容展示区 -->
+            <div id="popDiv" style="z-index: 1000">
+                <table id="content_table" bgcolor="white" border="0" cellspacing="0" cellpadding="0" style="background-color: white">
+                    <tbody id="content_table_body" style="font-size: 18px;">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!---pop-up-box---->
+<script type="text/javascript" src="/js/modernizr.custom.min.js"></script>
+<link href="/css/popup-box.css" rel="stylesheet" type="text/css" media="all"/>
+<script src="/js/jquery.magnific-popup.js" type="text/javascript"></script>
+<!---//pop-up-box---->
+<div id="small-dialog" class="mfp-hide" style="z-index: 1000">
+    <div class="login">
+        <h3>登录</h3>
+        <h4 id="loginErrorMessage"></h4>
+        <a class="play-icon popup-with-zoom-anim" href="#small-dialog1" style="float: right;padding-right:50px;">验证码登录</a>
+        <input type="text" value="Cellphone" id="loginCellphone" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Cellphone';}" />
+        <input type="password" value="Password" id="loginPassword" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}"/>
+        <input type="submit" value="登录" onclick="login()" />
+    </div>
+    <a  href="forgetPassword" style="padding-right: 200px">忘记密码</a>
+    <a class="play-icon popup-with-zoom-anim" href="#small-dialog2" style="float: right;padding-right: 50px">没有账号?去注册</a>
+</div>
+<div id="small-dialog1" class="mfp-hide" style="z-index: 1000">
+    <div class="login">
+        <h3>登录</h3>
+        <h4 id="loginCodeErrorMessage"></h4>
+        <a class="play-icon popup-with-zoom-anim" href="#small-dialog" style="float: right;padding-right:50px;">账号密码登录</a>
+        <input type="text" value="Cellphone" id="loginCellphoneByCode" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Cellphone';}" />
+        <input type="text" value="验证码" id="loginCode" class="code" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '验证码';}"/>
+        <input type="submit" value="   获取验证码   " onclick="code(this)" id="getCode" />
+        <input type="submit" value="登录" onclick="loginByCode(this)" />
+    </div>
+    <a class="play-icon popup-with-zoom-anim" href="#small-dialog2" style="float: right;padding-right: 50px">没有账号?去注册</a>
+</div>
+<div id="small-dialog2" class="mfp-hide" style="z-index: 1000">
+    <div class="signup">
+        <h3>注册</h3>
+        <h4 id="signUpErrorMessage"></h4>
+        <a class="play-icon popup-with-zoom-anim" href="#small-dialog" style="float: right;padding-right:50px;">已有账号?去登录</a>
+        <input type="text" id="signUpCellphone" class="cellphone"value="cellphone" onfocus="this.value = '';" onblur="if (this.value === '') {this.value = 'cellphone';}"  />
+        <input type="password" id="signUpPassword" value="Password" onfocus="this.value = '';" onblur="if (this.value === '') {this.value = 'Password';}"/>
+        <input type="password" id="signUpEnterPassword" value="Password" onfocus="this.value = '';" onblur="if (this.value === '') {this.value = 'signUpPassword';}if (this.value !== document.getElementById('signUpPassword').value) {document.getElementById('signUpErrorMessage').innerText='两次密码不一致哦';} "/>
+        <input type="submit"  value="注册" onclick="signUp()"/>
+    </div>
+</div>
+<script>
+    $(document).ready(function() {
+        $('.popup-with-zoom-anim').magnificPopup({
+            type: 'inline',
+            fixedContentPos: false,
+            fixedBgPos: true,
+            overflowY: 'auto',
+            closeBtnInside: true,
+            preloader: false,
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-zoom-in'
+        });
+    });
+    var xhr = null;
+    function login() {
+        if (window.XMLHttpRequest) {
+            xhr = new XMLHttpRequest();
+        } else {
+            xhr = new ActiveXObject('Microsoft.XMLHTTP');
+        }
+        var url_login = "/yantu/login/login";
+        var cellphone = document.getElementById("loginCellphone").value;
+        var password =  document.getElementById("loginPassword").value;
+        var objData = {
+            cellphone : cellphone,
+            password : password
+        };
+        var jsonData = JSON.stringify(objData);
+        console.log(objData)
+        xhr.open("POST", url_login, true);
+        xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+        xhr.onreadystatechange =  function () {
+            if(xhr.readyState===4 && xhr.status ===200 ){
+                var result= JSON.parse(xhr.responseText);
+                localStorage.setItem('loginMessage',JSON.stringify({data:xhr.responseText,time:new Date().getTime()}));
+                console.log(localStorage.getItem('loginMessage'));
+                if(result.status ===1){
+                    var arrayClose = document.getElementsByClassName("mfp-close");
+                    for(var i=0;i<arrayClose.length;i++){
+                        arrayClose[i].click();
+                    }
+                    document.getElementById("showPortrait").style.backgroundImage= "url("+result.data.visitorPortrait+")";
+                    document.getElementById("loginA").style.display = "none";
+                    document.getElementById("logoutA").style.display = "block";
+                    document.getElementById("switchMemberA").style.display ="block";
+                    document.getElementById("modifyPasswordA").style.display ="block";
+                    document.getElementById("modifyInformationA").style.display ="block";
+                    document.getElementById("orderManageA").style.display ="block";
+                }else{
+                    document.getElementById("loginErrorMessage").innerText=result.msg;
+                    document.getElementById("loginErrorMessage").style.color="red";
+                    localStorage.removeItem('loginMessage');
+                }
+            }
+        };
+        xhr.send(jsonData);
+    }
+    var wait = 60;
+    function code(obj) {
+        if (window.XMLHttpRequest) {
+            xhr = new XMLHttpRequest();
+        } else {
+            xhr = new ActiveXObject('Microsoft.XMLHTTP');
+        }
+        var url_code = "/yantu/login/code";
+        var cell =  document.getElementById("loginCellphoneByCode").value;
+        var objCode = {
+            cellPhone : document.getElementById("loginCellphoneByCode").value
+        };
+
+        console.log(cell);
+        console.log(objCode);
+        var jsonCode = JSON.stringify(objCode);
+        xhr.open("POST", url_code, true);
+        xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+        xhr.onreadystatechange =  function () {
+            if(xhr.readyState===4 && xhr.status ===200 ){
+                var result = xhr.responseText;
+                if(result !== null){
+                    localStorage.setItem("loginCode",result);
+                }else{
+                    document.getElementById("loginCodeErrorMessage").innerText="验证码未知错误";
+                    document.getElementById("loginCodeErrorMessage").style.color="red";
+
+                }
+            }
+        };
+        xhr.send(jsonCode);
+        time(obj);
+    }
+    function time(obj) {
+        if (wait === 0) {
+            obj.removeAttribute("disabled");
+            obj.value="   获取验证码   ";
+            wait = 60;
+        } else {
+            obj.setAttribute("disabled", true);
+            obj.value=wait+"秒后重新发送";
+            wait--;
+            console.log(wait)
+            t=setTimeout(function() {
+                time(obj)
+            }, 1000)
+        }
+    }
+    function loginByCode(obj) {
+        wait = 60;
+        clearTimeout(t);
+        document.getElementById("getCode").removeAttribute("disabled");
+        document.getElementById("getCode").value = "   获取验证码   ";
+        console.log(localStorage.getItem("loginCode"));
+        if(document.getElementById("loginCode").value === localStorage.getItem("loginCode")){
+            if (window.XMLHttpRequest) {
+                xhr = new XMLHttpRequest();
+            } else {
+                xhr = new ActiveXObject('Microsoft.XMLHTTP');
+            }
+            var url_login = "/yantu/login/login";
+            var cellphone = document.getElementById("loginCellphoneByCode").value;
+            var verificationCode =  document.getElementById("loginCode").value;
+            var objData = {
+                cellphone : cellphone,
+                verificationCode : verificationCode
+            };
+            console.log(objData);
+            var jsonData = JSON.stringify(objData);
+            xhr.open("POST", url_login, true);
+            xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+            xhr.onreadystatechange =  function () {
+                if(xhr.readyState===4 && xhr.status ===200 ){
+                    var result= JSON.parse(xhr.responseText);
+                    console.log(result);
+                    localStorage.setItem('loginMessage',JSON.stringify({data:xhr.responseText,time:new Date().getTime()}));
+                    if(result.status ===1){
+                        var arrayClose = document.getElementsByClassName("mfp-close");
+                        for(var i=0;i<arrayClose.length;i++){
+                            arrayClose[i].click();
+                        }
+                        document.getElementById("showPortrait").style.backgroundImage= "url("+result.data.visitorPortrait+")";
+                        document.getElementById("loginA").style.display = "none";
+                        document.getElementById("logoutA").style.display = "block";
+                        document.getElementById("switchMemberA").style.display ="block";
+                        document.getElementById("modifyPasswordA").style.display ="block";
+                        document.getElementById("modifyInformationA").style.display ="block";
+                        document.getElementById("orderManageA").style.display ="block";
+                    }else{
+                        document.getElementById("loginCodeErrorMessage").innerText=result.msg;
+                        document.getElementById("loginCodeErrorMessage").style.color="red";
+                        localStorage.removeItem('loginMessage');
+                    }
+                }
+            };
+            xhr.send(jsonData);
+        }else {
+            document.getElementById("loginCodeErrorMessage").innerText="验证码输入错误";
+            document.getElementById("loginCodeErrorMessage").style.color="red";
+        }
+
+    }
+    function signUp() {
+        if (window.XMLHttpRequest) {
+            xhr = new XMLHttpRequest();
+        } else {
+            xhr = new ActiveXObject('Microsoft.XMLHTTP');
+        }
+        var url_register = "/yantu/visitor/register";
+        var cellphone = document.getElementById("signUpCellphone").value;
+        var password =  document.getElementById("signUpPassword").value;
+        var objData = {
+            cellphone : cellphone,
+            password : password
+        };
+        var jsonData = JSON.stringify(objData);
+        xhr.open("POST", url_register, true);
+        xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+        xhr.onreadystatechange =  function () {
+            if(xhr.readyState===4 && xhr.status ===200 ){
+                var result= JSON.parse(xhr.responseText);
+                console.log(result);
+                if(result.status ===1){
+                    localStorage.removeItem('signUpMessage');
+                    localStorage.setItem('signUpMessage',JSON.stringify({data:xhr.responseText,time:new Date().getTime()}));
+                    window.location.href = "perfectInformation";
+                }else{
+                    document.getElementById("signUpErrorMessage").innerText=result.msg;
+                    document.getElementById("signUpErrorMessage").style.color="red";
+                    localStorage.removeItem('signUpMessage');
+                }
+            }
+        };
+        xhr.send(jsonData);
+    }
+</script>
+<!--End-pop-up-box-->
+<div class="team">
+    <div class="container">
+        <div class="team-main">
+            <h3>热门景点</h3>
+            <div class="team-top">
+                <div class="col-md-4 team-top-left" style="margin-bottom: 20px">
+                <img src="/images/t7.jpg">
+                <div class="t-top" ><h4>￥150起</h4>
+                    <P>千岛湖(天下第一秀水)</P>
+                    <div class="menu">
+                            <ul class="nav">
+                                <li><a href="scenicDetail/12">查看详情</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 team-top-left" style="margin-bottom: 20px">
+                    <img src="/images/t10.jpg">
+                    <div class="t-top" ><h4>￥80起</h4>
+                        <P>西溪(国家湿地公园)</P>
+                        <div class="menu">
+                            <ul class="nav">
+                                <li><a href="scenicDetail/13">查看详情</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 team-top-left" style="margin-bottom: 20px">
+                    <img src="/images/t13.jpg">
+                    <div class="t-top" ><h4>￥60起</h4>
+                        <P>嘉兴南湖(江南三大明湖)</P>
+                        <div class="menu">
+                            <ul class="nav">
+                                <li><a href="scenicDetail/14">查看详情</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 team-top-left" style="margin-bottom: 20px">
+                    <img src="/images/t18.jpg">
+                    <div class="t-top" ><h4>￥230起</h4>
+                        <P>溪口滕头旅游区(历史悠久、山川秀丽)</P>
+                        <div class="menu">
+                            <ul class="nav">
+                                <li><a href="scenicDetail/15">查看详情</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 team-top-left" style="margin-bottom: 20px">
+                    <img src="/images/t24.jpg">
+                    <div class="t-top" ><h4>￥160起</h4>
+                        <P>普陀山(海天佛国、男孩圣境)</P>
+                        <div class="menu">
+                            <ul class="nav">
+                                <li><a href="scenicDetail/16">查看详情</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 team-top-left" style="margin-bottom: 20px">
+                    <img src="/images/t26.jpg">
+                    <div class="t-top" ><h4>￥180起</h4>
+                        <P>江郎山(俗称三片石)</P>
+                        <div class="menu">
+                            <ul class="nav">
+                                <li><a href="scenicDetail/17">查看详情</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 team-top-left" style="margin-bottom: 20px">
+                    <img src="/images/t32.jpg">
+                    <div class="t-top" ><h4>￥730起</h4>
+                        <P>横店影视城(中国好莱坞)</P>
+                        <div class="menu">
+                            <ul class="nav">
+                                <li><a href="scenicDetail/18">查看详情</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 team-top-left" style="margin-bottom: 20px">
+                    <img src="/images/t33.jpg">
+                    <div class="t-top" ><h4>￥100起</h4>
+                        <P>乌镇(中国最后的枕水人家)</P>
+                        <div class="menu">
+                            <ul class="nav">
+                                <li><a href="scenicDetail/19">查看详情</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 team-top-left" style="margin-bottom: 20px">
+                    <img src="/images/t37.jpg">
+                    <div class="t-top" ><h4>￥100起</h4>
+                        <P>西塘(“吴根越角”和“越角人家”之称)</P>
+                        <div class="menu">
+                            <ul class="nav">
+                                <li><a href="scenicDetail/20">查看详情</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="spl-btn" style="margin-left: 500px;margin-top: 1460px">
+                <a href="/queryScenicList">查看全部</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="team">
+    <div class="container">
+        <div class="team-main">
+            <h3>热门旅游方案</h3>
+            <div class="team-top">
+                <div class="col-md-4 team-top-left" style="margin-bottom: 20px">
+                    <img src="/images/tongliguzhen3.jpg">
+                    <div class="t-top" ><h4>￥588起</h4>
+                        <P>海天佛国普陀山+紫竹林+南海观音+慧济寺2日跟团游(把这里装点的犹如童话世界)</P>
+                        <div class="menu">
+                            <ul class="nav">
+                                <li><a href="planDetail/6">查看详情</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 team-top-left" style="margin-bottom: 20px">
+                    <img src="/images/jinjihu2.jpg">
+                    <div class="t-top" ><h4>￥358起</h4>
+                        <P>磐安乌石村+十八涡+舞龙峡纯玩休闲2日跟团游(古枫参天，翠竹连绵)</P>
+                        <div class="menu">
+                            <ul class="nav">
+                                <li><a href="planDetail/9">查看详情</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 team-top-left" style="margin-bottom: 20px">
+                    <img src="/images/zhuozhengyuan1.jpg">
+                    <div class="t-top" ><h4>￥444起</h4>
+                        <P>鼎湖峰+古堰画乡大巴3日跟团游(带您领略江南不一样的山水民风)</P>
+                        <div class="menu">
+                            <ul class="nav">
+                                <li><a href="planDetail/13">查看详情</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 team-top-left" style="margin-bottom: 20px">
+                    <img src="/images/qilishantang1.jpg">
+                    <div class="t-top" ><h4>￥333起</h4>
+                        <P>大奇山+瑶琳仙境+天目溪竹筏漂流汽车2日跟团游(此景只因天上有,人间难得几回闻)</P>
+                        <div class="menu">
+                            <ul class="nav">
+                                <li><a href="planDetail/12">查看详情</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 team-top-left" style="margin-bottom: 20px">
+                    <img src="/images/gongyuan1.jpg">
+                    <div class="t-top" ><h4>￥555起</h4>
+                        <P>临安大明山+天目大峡谷2日跟团游(大明山：灵动的山水泼墨画)</P>
+                        <div class="menu">
+                            <ul class="nav">
+                                <li><a href="planDetail/11">查看详情</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 team-top-left" style="margin-bottom: 20px">
+                    <img src="/images/qilishantang4.jpg">
+                    <div class="t-top" ><h4>￥299起</h4>
+                        <P>安吉大竹海+藏龙百瀑+灵峰山2日跟团游(赠送1早2正餐，体验农家乐趣)</P>
+                        <div class="menu">
+                            <ul class="nav">
+                                <li><a href="planDetail/10">查看详情</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="spl-btn" style="margin-left: 500px;margin-top: 1000px">
+                <a href="/queryPlanList">查看全部</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--start-team-->
+<div class="team">
+    <div class="container">
+        <div class="team-main">
+            <h3>优秀导游</h3>
+            <div class="team-top">
+                <div class="col-md-4 team-top-left">
+                    <img src="images/team-1.jpg">
+                    <div class="t-top">
+                        <h4>优秀导游</h4>
+                        <P>Conrad</P>
+                        <ul>
+                            <li><a href="#"><span class="fb"> </span></a></li>
+                            <li><a href="#"><span class="twit"> </span></a></li>
+                            <li><a href="#"><span class="google"> </span></a></li>
+                            <li><a href="#"><span class="you"> </span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4 team-top-left">
+                    <img src="images/team-2.jpg">
+                    <div class="t-top">
+                        <h4>优秀导游</h4>
+                        <P>Devin</P>
+                        <ul>
+                            <li><a href="#"><span class="fb"> </span></a></li>
+                            <li><a href="#"><span class="twit"> </span></a></li>
+                            <li><a href="#"><span class="google"> </span></a></li>
+                            <li><a href="#"><span class="you"> </span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4 team-top-left">
+                    <img src="images/team-3.jpg">
+                    <div class="t-top">
+                        <h4>模范导游</h4>
+                        <P>Abbas</P>
+                        <ul>
+                            <li><a href="#"><span class="fb"> </span></a></li>
+                            <li><a href="#"><span class="twit"> </span></a></li>
+                            <li><a href="#"><span class="google"> </span></a></li>
+                            <li><a href="#"><span class="you"> </span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="spl-btn" style="margin-left: 500px">
+                <a href="/getGuiderList">查看全部</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!--end-team-->
+
+<!--start-footer-->
+<div class="footer">
+    <div class="container">
+        <div class="footer-main">
+            <div class="col-md-5 footer-left">
+                <h5>联系我们</h5>
+                <ul>
+                    <li><a href="#"><span class="twt"> </span></a></li>
+                    <li><a href="#"><span class="fb"> </span></a></li>
+                    <li><a href="#"><span class="p"> </span></a></li>
+                    <li><a href="#"><span class="yt"> </span></a></li>
+                    <li><a href="#"><span class="in"> </span></a></li>
+                </ul>
+                <h5>地址 苏州市创新科技园</h5>
+                <p>官方邮箱 <a href="crazylemon@gmail.com"> crazylemon@gmail.com</a></p>
+                <p>官方电话  +86 17678627809</p>
+            </div>
+            <div class="col-md-7 footer-right">
+                <h4>给我们的建议</h4>
+                <span>
+						<input type="text"  value="请在这里留下您的宝贵建议" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '请在这里留下您的宝贵建议';}">
+						<input type="submit" value="提交">
+					</span>
+                <ul>
+                    <li><a href="/index">首页</a></li>
+                    <li><a href="/queryPlanList">周边跟团游</a></li>
+                    <li><a href="/queryScenicList">热门景点</a></li>
+                    <li><a href="/privateCustom">私人订制</a></li>
+                    <li><a class="play-icon popup-with-zoom-anim" href="#small-dialog">登录</a></li>
+                    <li><a class="play-icon popup-with-zoom-anim" href="#small-dialog2">注册</a></li>
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        <div class="footer-text">
+            <p>Copyright &copy; 2018-crazylemon项目组-沿途旅行</p>
+        </div>
+    </div>
+    <a href="#header" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover"
+                                                                             style="opacity: 1;"> </span></a>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <div class="btn-group" style="z-index: 1000" >
+        <a id="showPortrait" href="javascript:showFrame()" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  onblur="document.getElementById('showFrameDiv').style.display='none'" style="display: block;"> <span id="toTopl" style="opacity: 1;"> </span></a>
+        <div class="dropdown-menu" id="showFrameDiv" style="display: none;position: absolute;">
+            <a class="dropdown-item" href="javascript:window.location.href='/modifyInformation'" id="modifyInformationA" style="display: none;width: 100%;padding: .25rem 1.5rem;clear: both;font-weight: 400;color: #212529;text-align: center;white-space: nowrap;background-color: transparent;border: 0;">修改资料</a>
+            <a class="dropdown-item" href="javascript:window.location.href='/modifyPassword'" id="modifyPasswordA" style="display: none;width: 100%;padding: .25rem 1.5rem;clear: both;font-weight: 400;color: #212529;text-align: center;white-space: nowrap;background-color: transparent;border: 0;">修改密码</a>
+            <a class="dropdown-item" href="javascript:window.location.href='/orderManager'" id="orderManageA" style="display: none;width: 100%;padding: .25rem 1.5rem;clear: both;font-weight: 400;color: #212529;text-align: center;white-space: nowrap;background-color: transparent;border: 0;">订单管理</a>
+            <a class="dropdown-item" href="javascript:switchMember()" id="switchMemberA" style="display: none;width: 100%;padding: .25rem 1.5rem;clear: both;font-weight: 400;color: #212529;text-align: center;white-space: nowrap;background-color: transparent;border: 0;">切换账号</a>
+            <a class="dropdown-item" href="javascript:logout()" id="logoutA" style="display: none;width: 100%;padding: .25rem 1.5rem;clear: both;font-weight: 400;color: #212529;text-align: center;white-space: nowrap;background-color: transparent;border: 0;">退出</a>
+            <a class="play-icon popup-with-zoom-anim" href="#small-dialog" id="loginA" style="display: block;width: 100%;padding: .25rem 1.5rem;clear: both;font-weight: 400;color: #212529;text-align: center;white-space: nowrap;background-color: transparent;border: 0;"><span>登录 </span></a>
+        </div>
+    </div>
+    <script>
+        function showFrame() {
+            document.getElementById("showFrameDiv").style.display = "";
+        }
+        function logout() {
+            if (window.XMLHttpRequest) {
+                xhr = new XMLHttpRequest();
+            } else {
+                xhr = new ActiveXObject('Microsoft.XMLHTTP');
+            }
+            var url_logout = "/yantu/login/logout";
+            xhr.open("GET", url_logout, true);
+            xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+            xhr.onreadystatechange =  function () {
+                if(xhr.readyState===4 && xhr.status ===200 ){
+                    console.log(xhr.responseText)
+                    if(xhr.responseText !==null){
+                        localStorage.removeItem('loginMessage');
+                        window.location.href = "index";
+                    }
+                }
+            };
+            xhr.send();
+        }
+        function switchMember() {
+            if (window.XMLHttpRequest) {
+                xhr = new XMLHttpRequest();
+            } else {
+                xhr = new ActiveXObject('Microsoft.XMLHTTP');
+            }
+            var url_logout = "/yantu/login/logout";
+            xhr.open("GET", url_logout, true);
+            xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+            xhr.onreadystatechange =  function () {
+                if(xhr.readyState===4 && xhr.status ===200 ){
+                    console.log(xhr.responseText)
+                    if(xhr.responseText !==null){
+                        localStorage.removeItem('loginMessage');
+                        document.getElementById("loginA").click();
+                    }
+                }
+            };
+            xhr.send();
+        }
+    </script>
+</div>
+<!--end-footer-->
+</body>
+<script type="text/javascript">
+    var xhr;
+    //获得用户输入内容的关联信息的函数
+    function getMoreContents() {
+        //获得用户的输入内容
+        var content  = document.getElementById("keyword").value;
+        if(content =="" ){
+            clearContent();
+            return 0;
+        }
+        //给服务器发送用户输入的内容
+        xhr = creatXmlHttp();
+        //给服务器发送数据
+        var url = "/yantu/searchBox/search?keyword="+content;
+        //与服务器建立连接
+        xhr.open("GET",url);
+        xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+        //xhr绑定回调方法
+        xhr.onreadystatechange=callback;
+        xhr.send();
+
+    }
+
+    //获得XmlHttp对象
+    function creatXmlHttp() {
+        var xhr;
+        if(window.XMLHttpRequest){
+            xhr = new XMLHttpRequest();
+        }else{
+            if(window.ActiveXObject){
+                xhr = new ActiveXObject('Microsoft.XMLHTTP');
+            }
+        }
+        return xhr;
+    }
+
+    //回调函数
+    function callback() {
+        if(xhr.readyState === 4 && xhr.status === 200){
+            //交互成功, 获得相应的数据是文本格式
+            var result = xhr.responseText;
+            //解析获得的数据
+            var json = eval("("+result+")");
+            //获得数据后 就可以动态的显示这些数据 并将数据展示到输入框的下面
+            setContent(json);
+
+        }
+    }
+
+    //设置关联数据的展示,参数代表的是服务器传递过来的关联数据
+    function setContent(contents) {
+        clearContent();
+        //获得关联数据的长度, 来确定生成多少<tr></tr>
+        // setLocation();
+        var size = contents.length;
+        //设置内容
+        for(var i=0;i<size;i++){
+            var nextNode = contents[i];//代表的是json格式数据的第i个元素
+            var tr = document.createElement("tr");
+            var td = document.createElement("td");
+            td.setAttribute("border","0");
+            td.setAttribute("bgcolor","white");
+            td.onmouseover = function () {
+                this.className = 'mouseOver';
+            };
+            td.onmouseout = function () {
+                this.className = 'mouseOut';
+            };
+            td.onmousedown = function () {
+                //当鼠标点击关联数据时  输入框数据改成点击的关联数据
+                document.getElementById("keyword").value = this.innerHTML;
+            };
+            var text = document.createTextNode(nextNode);
+            td.appendChild(text);
+            tr.appendChild(td);
+            document.getElementById("content_table_body").appendChild(tr);
+        }
+    }
+
+    //清空之前的数据
+    function clearContent() {
+        var contentTableBody = document.getElementById("content_table_body");
+        var size = contentTableBody.childNodes.length;
+        for(var i=size-1;i>=0;i--){
+            contentTableBody.removeChild(contentTableBody.childNodes[i]);
+        }
+    }
+
+    //输入框失去焦点时, 关联信息清空
+    function keywordBlur() {
+        clearContent();
+    }
+
+</script>
+</html>

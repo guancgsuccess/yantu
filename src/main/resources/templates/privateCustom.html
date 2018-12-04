@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PrivateCustom</title>
+    <link rel="SHORTCUT ICON" href="/images/title.ico"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content="Blue Water Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design"/>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
+    <link href="/css/bootstrap.css" rel='stylesheet' type='text/css'/>
+    <link href="/css/style.css" rel='stylesheet' type='text/css'/>
+    <link rel="stylesheet" href="/css/privateCustom.css">
+    <script type="application/javascript" src=" /js/privateCustom.js"></script>
+    <script src="/js/jquery-1.11.0.min.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Exo:100,200,300,400,500,600,700,800,900,100italic,200italic,300italic,400italic,500italic,600italic,700italic,800italic,900italic'
+          rel='stylesheet' type='text/css'>
+    <!---- start-smoth-scrolling---->
+    <script type="text/javascript" src=" /js/move-top.js"></script>
+    <link rel="stylesheet" href="/css/searchBox.css">
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $(".scroll").click(function (event) {
+                event.preventDefault();
+                $('html,body').animate({scrollTop: $(this.hash).offset().top}, 1000);
+            });
+        });
+        window.onload = function () {
+            var data = localStorage.getItem('loginMessage');
+            console.log(data);
+            if(data!=null) {
+                var objData = JSON.parse(data);
+                if (new Date().getTime() - objData.time > 1000 * 60 * 30) {
+                    localStorage.removeItem('loginMessage');
+                } else {
+                    document.getElementById("showPortrait").style.backgroundImage= "url("+JSON.parse(objData.data).data.visitorPortrait+")";
+                    document.getElementById("loginA").style.display = "none";
+                    document.getElementById("logoutA").style.display = "block";
+                    document.getElementById("switchMemberA").style.display = "block";
+                    document.getElementById("modifyPasswordA").style.display = "block";
+                    document.getElementById("modifyInformationA").style.display = "block";
+                    document.getElementById("orderManageA").style.display = "block";
+                }
+            }
+        }
+    </script>
+
+</head>
+<body>
+<!--start-banner-->
+<div id="header" xmlns="http://www.w3.org/1999/html">
+    <div class="mfw-header">
+        <div class="header-wrap clearfix">
+            <div class="head-logo">
+                <a class="mfw-logo" title="" href="">
+                    <img src="/images/logo-yantu.png" height="65px" width="65px">
+                </a>
+            </div>
+            <ul class="head-nav" data-cs-t="headnav" id="_j_head_nav">
+                <li class="head-nav-index" data-cs-p="index">
+                    <a href="/index" title="首页">首页</a>
+                </li>
+                <li class="head-nav-place" data-cs-p="mdd">
+                    <a href="/queryPlanList" title="周边跟团游">周边跟团游</a>
+                </li>
+                <li class="head-nav-gonglve" data-cs-p="gonglve">
+                    <a href="/queryScenicList" title="热门景点">热门景点</a>
+                </li>
+                <li class="head-nav-gonglve" data-cs-p="gonglve">
+                    <a href="/privateCustom" title="私人订制">私人订制</a>
+                </li>
+            </ul>
+            <div id="pagelet-block-fdfe14e523864f5d21c81cb8e263dfc7" class="pagelet-block" data-api="apps:user:pagelet:pageViewHeadInfo" data-params="{&quot;type&quot;:1}" data-async="1" data-controller="/js/pageletcommon/pageHeadUserInfoWWWNormal">
+
+            </div>
+        </div>
+        <div class="shadow"></div>
+    </div>
+
+    <!----start-top-nav-script---->
+    <script type="text/javascript" src="/js/responsive-nav.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $(".scroll").click(function(event){
+                event.preventDefault();
+                $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+            });
+        });
+    </script>
+
+</div>
+<!--end-banner-->
+<!--start-services-->
+<div class="cus-formContent" id="formCntent">
+    <div class="cus-form clearfix">
+        <div class="cus-formLeft">
+            <div class="cus-formLeft-title clearfix">
+                <h3>需求信息</h3>
+                <p>专业定制师将在1小时内与您取得联系</p>
+            </div>
+            <ul class="cus-formLeft-main clearfix">
+                <li class="cus-formLi">
+                    <div class="cus-component J_cusType">
+                        <label>出游规模：</label>
+                        <span class="cus-select cur" id="cus-select-private"  onclick="changeVisitor(this)">个人定制</span>
+                        <span class="cus-select" id="cus-select-company"  onclick="changeVisitor(this)">公司定制</span>
+                    </div>
+                </li>
+                <li class="cus-formLi">
+                    <div class="cus-component">
+                        <label>出发地：</label>
+                        <div class="citybox J_startCity">
+                            <input class="cus-input J_cusDep J_cusStart" id="placeOfDeparture" data-cityid="226" type="text" name="" oninput="userInput(this)" placeholder="请选择您的出发地">
+                        </div>
+                        <span class="cus-Cinput" id="error-tip-placeOfDeparture" style="display: none;margin-left:120px;"><i></i><br>请输入您的出发地！</span>
+                    </div>
+                </li>
+                <li class="cus-formLi">
+                    <div class="cus-component">
+                        <label>目的地：</label>
+                        <div class="citybox J_endCity">
+                            <input class="cus-input J_cusDep J_cusEnd" id="destination" projectid="-1" type="text" name="" oninput="userInput(this)"  placeholder="请选择您的目的地">
+                        </div>
+                        <span class="cus-Cinput" id="error-tip-destination" style="display: none;margin-left:120px;"><i></i><br>请输入您的目的地！</span>
+                    </div>
+                </li>
+                <li class="cus-formLi">
+                    <div class="cus-component">
+                        <label>出发时间：</label>
+                        <input class="cus-input J_cusTime" id="departureDate" type="text" name="" oninput="userInput(this)" placeholder="请选择您的大概出游日期">
+                        <span class="cus-Cinput" id="error-tip-departureDate" style="display: none;margin-left:120px;"><i></i><br>请输入您的大概出游日期！(格式为：yyyy-MM-dd HH:mm:ss)</span>
+                    </div>
+                </li>
+                <li class="cus-formLi">
+                    <label>出游天数：</label>
+                    <div class="cus-component">
+                        <span class="cus-countBox">
+                            <span class="cus-count clearfix">
+                                <span class="cus-minCount disCount J_minCount" id="subDay" onclick="ChangeNumber(this)"></span>
+                                <input class="cus-countShow J_PlayDays" id="dataNumber" type="text" value="1" data-id="1">
+                                <span class="cus-maxCount J_maxCount" id="addDay" onclick="ChangeNumber(this)"></span>
+                            </span> 天
+                        </span>
+                    </div>
+                </li>
+                <li class="cus-formLi">
+                    <div class="cus-component">
+                        <label>出游人数：</label>
+                        <span class="cus-countBox">
+                            <span class="cus-count clearfix">
+                                <span class="cus-minCount disCount J_minCount J_num" id="subAdultNumber" onclick="ChangeNumber(this)"></span>
+                                <input class="cus-countShow J_adult" id="adultNumber" type="text" value="1" data-id="1">
+                                <span class="cus-maxCount J_maxCount J_num" id="addAdultNumber" onclick="ChangeNumber(this)"></span>
+                            </span>成人
+                        </span>
+                        <span class="cus-countBox">
+                            <span class="cus-count clearfix">
+                            <span class="cus-minCount disCount J_minCount J_num" id="subKitNumber" onclick="ChangeNumber(this)"></span>
+                                <input class="cus-countShow J_child" id="kidNumber" type="text" value="0" data-id="0">
+                                <span class="cus-maxCount J_maxCount J_num" id="addKitNUmber" onclick="ChangeNumber(this)"></span>
+                            </span> 儿童
+                        </span>
+                    </div>
+                </li>
+                <li class="cus-formLi">
+                    <label>人均消费：</label>
+                    <div class="cus-component cus-selectBox J_cusCost">
+                        <span class="cus-select cur" id="cus-select-1" data-min="1" data-max="499" onclick="changePrice(this)">1-499</span>
+                        <span class="cus-select" id="cus-select-500" data-min="500" data-max="999" onclick="changePrice(this)">500-999</span>
+                        <span class="cus-select" id="cus-select-1000" data-min="1000" data-max="4999" onclick="changePrice(this)">1000-4999</span>
+                        <span class="cus-select" id="cus-select-5000" data-min="5000" data-max="9999" onclick="changePrice(this)">5000-9999</span>
+                        <span class="cus-select" id="cus-select-10000" data-min="10000" data-max="14999" onclick="changePrice(this)">10000-14999</span>
+                        <span class="cus-select" id="cus-select-15000" data-min="15000" data-max="19999" onclick="changePrice(this)">15000-19999</span>
+                        <span class="cus-select" id="cus-select-20000" data-min="20000" data-max="100000" onclick="changePrice(this)">20000以上</span>
+                        <span class="cus-select" id="cus-select-none" data-min="" data-max="" onclick="changePrice(this)">不确定</span>
+                    </div>
+                </li>
+                <li class="cus-formLi">
+                    <div class="cus-component">
+                        <label>联系人：</label>
+                        <input class="cus-input text-input J_cuskeyup J_CustomerName" id="linkman" type="text" name="" oninput="userInput(this)" placeholder="请输入联系人姓名">
+                        <span class="cus-Cinput" id="error-tip-linkman" style="display: none;margin-left:120px;"><i></i><br>请输入联系人姓名！</span>
+                    </div>
+                </li>
+                <li class="cus-formLi">
+                    <div class="cus-component">
+                        <label>联系电话：</label>
+                        <input class="cus-input text-input J_cuskeyup J_CustomerMobile" id="linkPhone" type="text" name="" oninput="userInput(this)" placeholder="请输入联系电话" maxlength="11">
+                        <span class="cus-Cinput" id="error-tip-linkPhone" style="display: none;margin-left:120px;"><i></i><br>请输入联系电话！</span>
+                    </div>
+                </li>
+                <li id="companyName" class="TeamOrCompanyName none" value="0" style="display: none;">
+                    <div class="cus-component">
+                        <label>企业名称：</label>
+                        <input class="cus-input text-input J_cuskeyup J_TeamOrCompanyName" id="nameOfCompany" type="text" name="" oninput="userInput(this)" placeholder="请输入企业名称">
+                        <span class="cus-Cinput" id="error-tip-nameOfCompany" style="display: none;margin-left:120px;"><i></i><br>请输入企业名称！</span>
+                    </div>
+                </li>
+            </ul>
+            <div class="cus-submit J_cusSave" onclick="savePrivateCustom()">提交</div>
+        </div>
+        <div class="cus-formRight">
+            <h3>需求清单</h3>
+            <ul class="cus-formRight-list J_formList">
+                <li>
+                    <label>出游规模：</label>
+                    <span id="list-methodName" >个人定制</span>
+                    <em id="list-methodName-em" class="check_valid" style="display: none"></em>
+                </li>
+                <li>
+                    <label>出发地：</label>
+                    <span id="list-placeOfDeparture" name="customizationDepart"></span>
+                    <em id="list-placeOfDeparture-em" class="check_valid" style="display: none"></em>
+                </li>
+                <li>
+                    <label>目的地：</label>
+                    <span id="list-destination" name="customizationDestination"></span>
+                    <em id="list-destination-em" class="check_valid" style="display: none"></em>
+                </li>
+                <li>
+                    <label>出游时间：</label>
+                    <span id="list-departureDate" name="customizationGooff"></span>
+                    <em id="list-departureDate-em" class="check_valid" style="display: none"></em>
+                </li>
+                <li>
+                    <label>游玩天数：</label>
+                    <span id="list-dataNumber" name="customizationDays">1</span>
+                    <em id="list-dataNumber-em" class="check_valid" ></em>
+                </li>
+                <li>
+                    <label>出游人数：</label>
+                    <span id="list-personNumber" name="customizationNum">1</span>
+                    <em id="list-personNumber-em" class="check_valid"></em>
+                </li>
+                <li>
+                    <label>人均预算：</label>
+                    <span id="list-priceId" name="customizationPreprice">1-499</span>
+                    <em id="list-priceId-em" class="check_valid"></em>
+                </li>
+                <li>
+                    <label>联系人：</label>
+                    <span id="list-linkman" name="customizationPeopleName"></span>
+                    <em id="list-linkman-em" class="check_valid" style="display: none"></em>
+                </li>
+                <li>
+                    <label>联系电话：</label>
+                    <span id="list-linkPhone" class="check_phone" name="customizationPhone"></span>
+                    <em id="list-linkPhone-em" class="check_valid" style="display: none"></em>
+                </li>
+                <li id="list-companyName" class="teamOrCompanyName none" style="display: none">
+                    <label>企业名称：</label>
+                    <span id="list-nameOfCompany"></span>
+                    <em id="list-nameOfCompany-em" class="check_valid" style="display: none"></em>
+                </li>
+            </ul>
+            <div class="cus-tag">◆</div>
+        </div>
+    </div>
+</div>
+<!--end-services-->
+<!---pop-up-box---->
+<script type="text/javascript" src="/js/modernizr.custom.min.js"></script>
+<link href="/css/popup-box.css" rel="stylesheet" type="text/css" media="all"/>
+<script src="/js/jquery.magnific-popup.js" type="text/javascript"></script>
+<!---//pop-up-box---->
+<div id="small-dialog" class="mfp-hide" style="z-index: 1000">
+    <div class="login">
+        <h3>登录</h3>
+        <h4 id="loginErrorMessage"></h4>
+        <a class="play-icon popup-with-zoom-anim" href="#small-dialog1" style="float: right;padding-right:50px;">验证码登录</a>
+        <input type="text" value="Cellphone" id="loginCellphone" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Cellphone';}" />
+        <input type="password" value="Password" id="loginPassword" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}"/>
+        <input type="submit" value="登录" onclick="login()" />
+    </div>
+    <a  href="forgetPassword" style="padding-right: 200px">忘记密码</a>
+    <a class="play-icon popup-with-zoom-anim" href="#small-dialog2" style="float: right;padding-right: 50px">没有账号?去注册</a>
+</div>
+<div id="small-dialog1" class="mfp-hide" style="z-index: 1000">
+    <div class="login">
+        <h3>登录</h3>
+        <h4 id="loginCodeErrorMessage"></h4>
+        <a class="play-icon popup-with-zoom-anim" href="#small-dialog" style="float: right;padding-right:50px;">账号密码登录</a>
+        <input type="text" value="Cellphone" id="loginCellphoneByCode" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Cellphone';}" />
+        <input type="text" value="验证码" id="loginCode" class="code" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '验证码';}"/>
+        <input type="submit" value="   获取验证码   " onclick="code(this)" id="getCode" />
+        <input type="submit" value="登录" onclick="loginByCode(this)" />
+    </div>
+    <a class="play-icon popup-with-zoom-anim" href="#small-dialog2" style="float: right;padding-right: 50px">没有账号?去注册</a>
+</div>
+<div id="small-dialog2" class="mfp-hide" style="z-index: 1000">
+    <div class="signup">
+        <h3>注册</h3>
+        <h4 id="signUpErrorMessage"></h4>
+        <a class="play-icon popup-with-zoom-anim" href="#small-dialog" style="float: right;padding-right:50px;">已有账号?去登录</a>
+        <input type="text" id="signUpCellphone" class="cellphone"value="cellphone" onfocus="this.value = '';" onblur="if (this.value === '') {this.value = 'cellphone';}"  />
+        <input type="password" id="signUpPassword" value="Password" onfocus="this.value = '';" onblur="if (this.value === '') {this.value = 'Password';}"/>
+        <input type="password" id="signUpEnterPassword" value="Password" onfocus="this.value = '';" onblur="if (this.value === '') {this.value = 'signUpPassword';}if (this.value !== document.getElementById('signUpPassword').value) {document.getElementById('signUpErrorMessage').innerText='两次密码不一致哦';} "/>
+        <input type="submit"  value="注册" onclick="signUp()"/>
+    </div>
+</div>
+<script>
+    $(document).ready(function() {
+        $('.popup-with-zoom-anim').magnificPopup({
+            type: 'inline',
+            fixedContentPos: false,
+            fixedBgPos: true,
+            overflowY: 'auto',
+            closeBtnInside: true,
+            preloader: false,
+            midClick: true,
+            removalDelay: 300,
+            mainClass: 'my-mfp-zoom-in'
+        });
+    });
+    var xhr = null;
+    function login() {
+        if (window.XMLHttpRequest) {
+            xhr = new XMLHttpRequest();
+        } else {
+            xhr = new ActiveXObject('Microsoft.XMLHTTP');
+        }
+        var url_login = "/yantu/login/login";
+        var cellphone = document.getElementById("loginCellphone").value;
+        var password =  document.getElementById("loginPassword").value;
+        var objData = {
+            cellphone : cellphone,
+            password : password
+        };
+        var jsonData = JSON.stringify(objData);
+        console.log(objData)
+        xhr.open("POST", url_login, true);
+        xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+        xhr.onreadystatechange =  function () {
+            if(xhr.readyState===4 && xhr.status ===200 ){
+                var result= JSON.parse(xhr.responseText);
+                localStorage.setItem('loginMessage',JSON.stringify({data:xhr.responseText,time:new Date().getTime()}));
+                console.log(localStorage.getItem('loginMessage'));
+                if(result.status ===1){
+                    var arrayClose = document.getElementsByClassName("mfp-close");
+                    for(var i=0;i<arrayClose.length;i++){
+                        arrayClose[i].click();
+                    }
+                    document.getElementById("showPortrait").style.backgroundImage= "url("+result.data.visitorPortrait+")";
+                    document.getElementById("loginA").style.display = "none";
+                    document.getElementById("logoutA").style.display = "block";
+                    document.getElementById("switchMemberA").style.display ="block";
+                    document.getElementById("modifyPasswordA").style.display ="block";
+                    document.getElementById("modifyInformationA").style.display ="block";
+                    document.getElementById("orderManageA").style.display ="block";
+                }else{
+                    document.getElementById("loginErrorMessage").innerText=result.msg;
+                    document.getElementById("loginErrorMessage").style.color="red";
+                    localStorage.removeItem('loginMessage');
+                }
+            }
+        };
+        xhr.send(jsonData);
+    }
+    var wait = 60;
+    function code(obj) {
+        if (window.XMLHttpRequest) {
+            xhr = new XMLHttpRequest();
+        } else {
+            xhr = new ActiveXObject('Microsoft.XMLHTTP');
+        }
+        var url_code = "/yantu/login/code";
+        var cell =  document.getElementById("loginCellphoneByCode").value;
+        var objCode = {
+            cellPhone : document.getElementById("loginCellphoneByCode").value
+        };
+
+        console.log(cell);
+        console.log(objCode);
+        var jsonCode = JSON.stringify(objCode);
+        xhr.open("POST", url_code, true);
+        xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+        xhr.onreadystatechange =  function () {
+            if(xhr.readyState===4 && xhr.status ===200 ){
+                var result = xhr.responseText;
+                if(result !== null){
+                    localStorage.setItem("loginCode",result);
+                }else{
+                    document.getElementById("loginCodeErrorMessage").innerText="验证码未知错误";
+                    document.getElementById("loginCodeErrorMessage").style.color="red";
+
+                }
+            }
+        };
+        xhr.send(jsonCode);
+        time(obj);
+    }
+    function time(obj) {
+        if (wait === 0) {
+            obj.removeAttribute("disabled");
+            obj.value="   获取验证码   ";
+            wait = 60;
+        } else {
+            obj.setAttribute("disabled", true);
+            obj.value=wait+"秒后重新发送";
+            wait--;
+            console.log(wait)
+            t=setTimeout(function() {
+                time(obj)
+            }, 1000)
+        }
+    }
+    function loginByCode(obj) {
+        wait = 60;
+        clearTimeout(t);
+        document.getElementById("getCode").removeAttribute("disabled");
+        document.getElementById("getCode").value = "   获取验证码   ";
+        console.log(localStorage.getItem("loginCode"));
+        if(document.getElementById("loginCode").value === localStorage.getItem("loginCode")){
+            if (window.XMLHttpRequest) {
+                xhr = new XMLHttpRequest();
+            } else {
+                xhr = new ActiveXObject('Microsoft.XMLHTTP');
+            }
+            var url_login = "/yantu/login/login";
+            var cellphone = document.getElementById("loginCellphoneByCode").value;
+            var verificationCode =  document.getElementById("loginCode").value;
+            var objData = {
+                cellphone : cellphone,
+                verificationCode : verificationCode
+            };
+            console.log(objData);
+            var jsonData = JSON.stringify(objData);
+            xhr.open("POST", url_login, true);
+            xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+            xhr.onreadystatechange =  function () {
+                if(xhr.readyState===4 && xhr.status ===200 ){
+                    var result= JSON.parse(xhr.responseText);
+                    console.log(result);
+                    localStorage.setItem('loginMessage',JSON.stringify({data:xhr.responseText,time:new Date().getTime()}));
+                    if(result.status ===1){
+                        var arrayClose = document.getElementsByClassName("mfp-close");
+                        for(var i=0;i<arrayClose.length;i++){
+                            arrayClose[i].click();
+                        }
+                        document.getElementById("showPortrait").style.backgroundImage= "url("+result.data.visitorPortrait+")";
+                        document.getElementById("loginA").style.display = "none";
+                        document.getElementById("logoutA").style.display = "block";
+                        document.getElementById("switchMemberA").style.display ="block";
+                        document.getElementById("modifyPasswordA").style.display ="block";
+                        document.getElementById("modifyInformationA").style.display ="block";
+                        document.getElementById("orderManageA").style.display ="block";
+                    }else{
+                        document.getElementById("loginCodeErrorMessage").innerText=result.msg;
+                        document.getElementById("loginCodeErrorMessage").style.color="red";
+                        localStorage.removeItem('loginMessage');
+                    }
+                }
+            };
+            xhr.send(jsonData);
+        }else {
+            document.getElementById("loginCodeErrorMessage").innerText="验证码输入错误";
+            document.getElementById("loginCodeErrorMessage").style.color="red";
+        }
+
+    }
+    function signUp() {
+        if (window.XMLHttpRequest) {
+            xhr = new XMLHttpRequest();
+        } else {
+            xhr = new ActiveXObject('Microsoft.XMLHTTP');
+        }
+        var url_register = "/yantu/visitor/register";
+        var cellphone = document.getElementById("signUpCellphone").value;
+        var password =  document.getElementById("signUpPassword").value;
+        var objData = {
+            cellphone : cellphone,
+            password : password
+        };
+        var jsonData = JSON.stringify(objData);
+        xhr.open("POST", url_register, true);
+        xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+        xhr.onreadystatechange =  function () {
+            if(xhr.readyState===4 && xhr.status ===200 ){
+                var result= JSON.parse(xhr.responseText);
+                console.log(result);
+                if(result.status ===1){
+                    localStorage.removeItem('signUpMessage');
+                    localStorage.setItem('signUpMessage',JSON.stringify({data:xhr.responseText,time:new Date().getTime()}));
+                    window.location.href = "perfectInformation";
+                }else{
+                    document.getElementById("signUpErrorMessage").innerText=result.msg;
+                    document.getElementById("signUpErrorMessage").style.color="red";
+                    localStorage.removeItem('signUpMessage');
+                }
+            }
+        };
+        xhr.send(jsonData);
+    }
+</script>
+<!--End-pop-up-box-->
+<!--end-list-->
+<!--start-footer-->
+
+<div id="footer"  class="footer"  style="margin-top: -25px">
+    <div class="container">
+        <div class="footer-main">
+            <div class="col-md-5 footer-left">
+                <h5>联系我们</h5>
+                <ul>
+                    <li><a href="#"><span class="twt"> </span></a></li>
+                    <li><a href="#"><span class="fb"> </span></a></li>
+                    <li><a href="#"><span class="p"> </span></a></li>
+                    <li><a href="#"><span class="yt"> </span></a></li>
+                    <li><a href="#"><span class="in"> </span></a></li>
+                </ul>
+                <h5>地址 苏州市创新科技园</h5>
+                <p>官方邮箱 <a href="crazylemon@gmail.com"> crazylemon@gmail.com</a></p>
+                <p>官方电话  +86 17678627809</p>
+            </div>
+            <div class="col-md-7 footer-right">
+                <h4>给我们的建议</h4>
+                <span>
+						<input type="text"  value="请在这里留下您的宝贵建议" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '请在这里留下您的宝贵建议';}">
+						<input type="submit" value="提交">
+					</span>
+                <ul>
+                    <li><a href="/index">首页</a></li>
+                    <li><a href="/queryPlanList">周边跟团游</a></li>
+                    <li><a href="/queryScenicList">热门景点</a></li>
+                    <li><a href="/privateCustom">私人订制</a></li>
+                    <li><a class="play-icon popup-with-zoom-anim" href="#small-dialog">登录</a></li>
+                    <li><a class="play-icon popup-with-zoom-anim" href="#small-dialog2">注册</a></li>
+                </ul>
+            </div>
+            <div class="clearfix"> </div>
+        </div>
+        <div class="footer-text">
+            <p>Copyright &copy; 2018-crazylemon项目组-沿途旅行</p>
+        </div>
+    </div>
+    <a href="#header" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover"
+                                                                               style="opacity: 1;"> </span></a>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <div class="btn-group" style="z-index: 1000" >
+        <a id="showPortrait" href="javascript:showFrame()" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  onblur="document.getElementById('showFrameDiv').style.display='none'" style="display: block;"> <span id="toTopl" style="opacity: 1;"> </span></a>
+        <div class="dropdown-menu" id="showFrameDiv" style="display: none;position: absolute;">
+            <a class="dropdown-item" href="javascript:window.location.href='/modifyInformation'" id="modifyInformationA" style="display: none;width: 100%;padding: .25rem 1.5rem;clear: both;font-weight: 400;color: #212529;text-align: center;white-space: nowrap;background-color: transparent;border: 0;">修改资料</a>
+            <a class="dropdown-item" href="javascript:window.location.href='/modifyPassword'" id="modifyPasswordA" style="display: none;width: 100%;padding: .25rem 1.5rem;clear: both;font-weight: 400;color: #212529;text-align: center;white-space: nowrap;background-color: transparent;border: 0;">修改密码</a>
+            <a class="dropdown-item" href="javascript:window.location.href='/orderManager'" id="orderManageA" style="display: none;width: 100%;padding: .25rem 1.5rem;clear: both;font-weight: 400;color: #212529;text-align: center;white-space: nowrap;background-color: transparent;border: 0;">订单管理</a>
+            <a class="dropdown-item" href="javascript:switchMember()" id="switchMemberA" style="display: none;width: 100%;padding: .25rem 1.5rem;clear: both;font-weight: 400;color: #212529;text-align: center;white-space: nowrap;background-color: transparent;border: 0;">切换账号</a>
+            <a class="dropdown-item" href="javascript:logout()" id="logoutA" style="display: none;width: 100%;padding: .25rem 1.5rem;clear: both;font-weight: 400;color: #212529;text-align: center;white-space: nowrap;background-color: transparent;border: 0;">退出</a>
+            <a class="play-icon popup-with-zoom-anim" href="#small-dialog" id="loginA" style="display: block;width: 100%;padding: .25rem 1.5rem;clear: both;font-weight: 400;color: #212529;text-align: center;white-space: nowrap;background-color: transparent;border: 0;"><span>登录 </span></a>
+        </div>
+    </div>
+    <script>
+        function showFrame() {
+            document.getElementById("showFrameDiv").style.display = "";
+        }
+        function logout() {
+            if (window.XMLHttpRequest) {
+                xhr = new XMLHttpRequest();
+            } else {
+                xhr = new ActiveXObject('Microsoft.XMLHTTP');
+            }
+            var url_logout = "/yantu/login/logout";
+            xhr.open("GET", url_logout, true);
+            xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+            xhr.onreadystatechange =  function () {
+                if(xhr.readyState===4 && xhr.status ===200 ){
+                    console.log(xhr.responseText)
+                    if(xhr.responseText !==null){
+                        localStorage.removeItem('loginMessage');
+                        window.location.href = "index";
+                    }
+                }
+            };
+            xhr.send();
+        }
+        function switchMember() {
+            if (window.XMLHttpRequest) {
+                xhr = new XMLHttpRequest();
+            } else {
+                xhr = new ActiveXObject('Microsoft.XMLHTTP');
+            }
+            var url_logout = "/yantu/login/logout";
+            xhr.open("GET", url_logout, true);
+            xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+            xhr.onreadystatechange =  function () {
+                if(xhr.readyState===4 && xhr.status ===200 ){
+                    console.log(xhr.responseText)
+                    if(xhr.responseText !==null){
+                        localStorage.removeItem('loginMessage');
+                        document.getElementById("loginA").click();
+                    }
+                }
+            };
+            xhr.send();
+        }
+        function savePrivateCustom(){
+            if (window.XMLHttpRequest) {
+                xhr = new XMLHttpRequest();
+            } else {
+                xhr = new ActiveXObject('Microsoft.XMLHTTP');
+            }
+            var url_privateCustom = "/yantu/customization/save";
+            var customizationDepart = document.getElementById("list-placeOfDeparture").innerText;
+            var customizationDestination = document.getElementById("list-destination").innerText;
+            var customizationGooff = document.getElementById("list-departureDate").innerText;
+            var customizationDays = document.getElementById("list-dataNumber").innerText;
+            var customizationNum = document.getElementById("list-personNumber").innerText;
+            var customizationPreprice = document.getElementById("list-priceId").innerText;
+            var customizationPeopleName = document.getElementById("list-linkman").innerText;
+            var customizationPhone = document.getElementById("list-linkPhone").innerText;
+
+            var formData = "customizationDepart="+customizationDepart+"&customizationDestination="+customizationDestination
+                +"&customizationGooff="+customizationGooff+"&customizationDays="+customizationDays
+                +"&customizationNum="+customizationNum+"&customizationPreprice="+customizationPreprice
+                +"&customizationPeopleName="+customizationPeopleName+"&customizationPhone="+customizationPhone;
+
+            xhr.open("POST",url_privateCustom);
+            xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded; charset=utf-8");
+            xhr.onreadystatechange = function (ev) {
+                if(xhr.readyState === 4 && xhr.status === 200){
+                    alert("信息提交成功！设计师将于一小时内与您联络，请耐心等待。");
+                    window.location.href = "/orderManager";
+                }else{
+                    // alert("输入信息有误,请核对！(时间格式为:年-月-日 时:分:秒)");
+                }
+            };
+            xhr.send(formData);
+        }
+
+    </script>
+</div>
+<!--end-footer-->
+<div style="display:none">
+    <script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script>
+</div>
+</body>
+</html>
